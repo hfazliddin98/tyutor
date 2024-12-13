@@ -16,7 +16,7 @@ SECRET_KEY = 'django-insecure-zz4a1*6kqzl5cpd=72us5tmoc-4r$&q@qg1axnft!6bk+k3gv3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-DOMEN = 'omborxona2024.pythonanywhere.com'
+DOMEN = 'tyutr.pythonanywhere.com'
 LOCAL_DOMEN = '127.0.0.1'
 
 ALLOWED_HOSTS = ['.kokanddeveloper.uz', DOMEN, 'localhost', LOCAL_DOMEN]
