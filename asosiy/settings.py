@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'dbbackup', 
 
     # men qoshgan app
-    'users'
+    'users',
     'baxos',
     'topshiriqs',
 ]
