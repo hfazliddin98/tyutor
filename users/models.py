@@ -23,8 +23,8 @@ class Users(AbstractUser):
     superadmin = models.BooleanField(default=False)
     admin = models.BooleanField(default=False)
     tyutr = models.BooleanField(default=False)
-    fakultet = models.ForeignKey(Fakultets, on_delete=models.CASCADE, null=True)
-    rasm = models.ImageField(upload_to='users', null=True)
+    fakultet = models.ForeignKey(Fakultets, on_delete=models.CASCADE, null=True, blank=True)
+    rasm = models.ImageField(upload_to='users', blank=True)
     parol = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
