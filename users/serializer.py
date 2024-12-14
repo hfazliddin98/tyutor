@@ -21,6 +21,7 @@ class UserSerializer(serializers.ModelSerializer):
             user.set_password(password)  # Parolni shifrlash
             user.parol = password
         user.save()
+        return user
 
 
 
@@ -35,6 +36,7 @@ class UserSerializer(serializers.ModelSerializer):
             instance.parol = password
 
         instance.save()
+        return instance
 
 
 class FakultetsSerializer(serializers.ModelSerializer):
