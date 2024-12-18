@@ -8,11 +8,7 @@ class UserAdmin(admin.ModelAdmin):
         'username', 'first_name', 'last_name',
         'parol', 'is_superuser', 'is_active'
     ]
-    list_filter = [
-        'superadmin', 
-        'admin',
-        'tyutr'
-    ]
+
 
 @admin.register(Fakultets)
 class FakultetsAdmin(admin.ModelAdmin):
