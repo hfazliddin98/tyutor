@@ -6,7 +6,7 @@ from users.models import Users, Fakultets
 class UserAdmin(admin.ModelAdmin):
     list_display  = [
         'username', 'first_name', 'last_name',
-        'parol', 'is_superuser', 'is_active'
+        'is_superuser', 'is_active'
     ]
 
 

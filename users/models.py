@@ -14,16 +14,19 @@ class AsosiyModel(models.Model):
 class Fakultets(AsosiyModel):
     name = models.CharField(max_length=255)
 
-    def __str__(self):
-        return self.name
+
 
 
 
 class Users(AbstractUser):
-    rol = models.CharField(max_length=255, blank=True)
-    fakultet = models.ForeignKey(Fakultets, on_delete=models.CASCADE, null=True, blank=True)
-    rasm = models.ImageField(upload_to='users', blank=True)
-    parol = models.CharField(max_length=255, blank=True)
+    class RoleChoice(models.TextChoices):
+        SUPERADMIN = ("superadmin", "superadmin")
+        ADMIN = ("admin", "admin")
+        TUTOR = ("tutor", "tutor")
+        
 
-    def __str__(self):
-        return f'{self.last_name} {self.first_name}'
+    role = models.CharField(max_length=30, choices=RoleChoice.choices)
+    fakultet = models.ForeignKey(Fakultets, on_delete=models.CASCADE, null=True)
+    rasm = models.ImageField(upload_to='users', blank=True)
+
+
