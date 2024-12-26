@@ -28,5 +28,6 @@ class Users(AbstractUser):
     role = models.CharField(max_length=30, choices=RoleChoice.choices)
     fakultet = models.ForeignKey(Fakultets, on_delete=models.CASCADE, null=True)
     rasm = models.ImageField(upload_to='users', blank=True)
+    parol = models.CharField(max_length=255, blank=True)
 
 
