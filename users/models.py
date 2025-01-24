@@ -1,6 +1,7 @@
 import uuid
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from users.choices import UserRoleChoice
 
 
 class AsosiyModel(models.Model):
@@ -15,17 +16,8 @@ class Fakultets(AsosiyModel):
     name = models.CharField(max_length=255)
 
 
-
-
-
 class Users(AbstractUser):
-    class RoleChoice(models.TextChoices):
-        SUPERADMIN = ("superadmin", "superadmin")
-        ADMIN = ("admin", "admin")
-        TUTOR = ("tutor", "tutor")
-        
-
-    role = models.CharField(max_length=30, choices=RoleChoice.choices)
+    role = models.CharField(max_length=30, choices=UserRoleChoice.choices)
     fakultet = models.ForeignKey(Fakultets, on_delete=models.CASCADE, null=True)
     rasm = models.ImageField(upload_to='users', blank=True)
     parol = models.CharField(max_length=255, blank=True)
