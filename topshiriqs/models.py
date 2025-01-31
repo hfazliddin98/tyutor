@@ -4,7 +4,7 @@ from users.models import AsosiyModel, Users
 
 
 class Topshiriq(AsosiyModel):
-    users = models.ManyToManyField(Users)
+    users = models.ManyToManyField(Users, related_name="users")
     topshiriq_turi = models.CharField(max_length=30, choices=TopshiriqTuriChoice.choices)
     urinishlar_soni = models.CharField(max_length=2, blank=True)
     boshlanish_vaqti = models.DateField()
