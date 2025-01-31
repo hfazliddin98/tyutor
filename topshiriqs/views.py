@@ -1,17 +1,14 @@
 from rest_framework.viewsets import ModelViewSet
 from django_filters.rest_framework import DjangoFilterBackend
-from .models import MajburiyTopshiriq
-from .serializer import MajburiyTopshiriqGetSerializer, MajburiyTopshiriqPostSerializer
+from .models import Topshiriq, MajburiyTopshiriq, QoshimchaTopshiriq
+from .serializer import TopshiriqSerializer, MajburiyTopshiriqSerializer, QoshimchaTopshiriqSerializer
 
 
 
 
-class UserViewSet(ModelViewSet):
-    queryset = MajburiyTopshiriq.objects.all()
+class TopshiriqViewSet(ModelViewSet):
+    queryset = Topshiriq.objects.all()
+    serializer_class = TopshiriqSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['tur']
+    filterset_fields = ['users']
 
-    def get_serializer_class(self):
-        if self.action in ['list', 'retrieve']:  # GET uchun
-            return MajburiyTopshiriqGetSerializer
-        return MajburiyTopshiriqPostSerializer 

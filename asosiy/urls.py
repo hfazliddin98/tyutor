@@ -29,8 +29,8 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('users/', include('users.urls')),
-    path('baxos/', include('baxos.urls')),
-    path('topshiriqs/', include('topshiriqs.urls')),
+    path('baxo/', include('baxos.urls')),
+    path('topshiriq/', include('topshiriqs.urls')),
   
 
     # swagger
