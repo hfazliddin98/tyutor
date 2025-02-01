@@ -4,7 +4,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
 from rest_framework.viewsets import ModelViewSet
 from .models import Users,Fakultets
-from .serializer import UserGetSerializer, UserPostSerializer, FakultetsSerializer
+from .serializers import UserGetSerializer, UserPostSerializer, FakultetsSerializer
 
 
 @csrf_exempt
@@ -14,6 +14,7 @@ def bosh_sahifa(request):
 
 class UserViewSet(ModelViewSet):
     queryset = Users.objects.filter(is_superuser=False)
+    http_method_names = ['get', 'post', 'patch', 'delete']
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['username', 'role']
 
@@ -26,3 +27,4 @@ class UserViewSet(ModelViewSet):
 class FakultetsViewSet(ModelViewSet):
     queryset = Fakultets.objects.all()
     serializer_class = FakultetsSerializer
+    http_method_names = ['get', 'post', 'patch', 'delete']

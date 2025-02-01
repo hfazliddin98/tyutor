@@ -5,7 +5,7 @@ from users.models import Users, Fakultets
 @admin.register(Users)
 class UserAdmin(admin.ModelAdmin):
     list_display  = [
-        'username', 'first_name', 'last_name',
+        'id','username', 'first_name', 'last_name',
         'is_superuser', 'is_active'
     ]
 

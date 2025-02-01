@@ -12,9 +12,9 @@ from users.views import bosh_sahifa
 
 schema_view = get_schema_view(
    openapi.Info(
-      title="Tyutr",
+      title="Tyutor",
       default_version='v1.1',
-      description="Tyutr uchun yaratilgan API",
+      description="Tyutor uchun yaratilgan API",
       terms_of_service="https://kspi.uz",
       contact=openapi.Contact(email="hatamovfazliddin5@gmail.com"),
       license=openapi.License(name="KSPI License"),
@@ -29,8 +29,8 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('users/', include('users.urls')),
-    path('baxo/', include('baxos.urls')),
-    path('topshiriq/', include('topshiriqs.urls')),
+    path('baxo/', include('baxo.urls')),
+    path('topshiriq/', include('topshiriq.urls')),
   
 
     # swagger
