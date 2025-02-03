@@ -6,7 +6,7 @@ from topshiriq.models import Topshiriq, MajburiyTopshiriq, QoshimchaTopshiriq
 
 
 class TopshiriqSerializer(ModelSerializer):
-    users = PrimaryKeyRelatedField(queryset=Users.objects.all(), many=True)  # many=True kerak!
+    topshiriq_users = PrimaryKeyRelatedField(queryset=Users.objects.all(), many=True)  # many=True kerak!
     class Meta:
         model = Topshiriq
         fields = [
