@@ -1,5 +1,6 @@
 from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField
 from users.models import Users
+from users.middleware import get_current_request
 from users.choices import UserRoleChoice
 # from topshiriq.models import SuperAdminTopshiriq, SuperAdminMajburiyTopshiriq, SuperAdminQoshimchaTopshiriq
 from topshiriq.models import Topshiriq, MajburiyTopshiriq, QoshimchaTopshiriq
@@ -10,8 +11,30 @@ class TopshiriqSerializer(ModelSerializer):
     class Meta:
         model = Topshiriq
         fields = [
-            'id', 'admin_user', 'topshiriq_users', 'topshiriq_turi', 
+            'id', 'topshiriq_users', 'topshiriq_turi', 
             'majburiy_topshiriq_turi', 'topshiriq_soni', 'max_baxo',
+            'title', 'body', 'file1', 'file2', 'file3', 'file4', 
+            'boshlanish_vaqti', 'tugash_vaqti'
+        ]
+
+
+class SuperAdminTopshiriqSerializer(ModelSerializer):
+    topshiriq_users = PrimaryKeyRelatedField(queryset=Users.objects.all(), many=True)  # many=True kerak!
+    class Meta:
+        model = Topshiriq
+        fields = [
+            'id', 'topshiriq_users', 'topshiriq_turi', 
+            'majburiy_topshiriq_turi', 'topshiriq_soni', 'max_baxo',
+            'title', 'body', 'file1', 'file2', 'file3', 'file4', 
+            'boshlanish_vaqti', 'tugash_vaqti'
+        ]
+
+class AdminTopshiriqSerializer(ModelSerializer):
+    topshiriq_users = PrimaryKeyRelatedField(queryset=Users.objects.all(), many=True)  # many=True kerak!
+    class Meta:
+        model = Topshiriq
+        fields = [
+            'id', 'admin_user', 'topshiriq_users', 'max_baxo',
             'title', 'body', 'file1', 'file2', 'file3', 'file4', 
             'boshlanish_vaqti', 'tugash_vaqti'
         ]
