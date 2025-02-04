@@ -40,4 +40,4 @@ class UserViewSet(ModelViewSet):
 class FakultetsViewSet(ModelViewSet):
     queryset = Fakultets.objects.all()
     serializer_class = FakultetsSerializer
-    http_method_names = ['get', 'post', 'patch', 'delete']
+    http_method_names = ['get', 'post', 'patch']
