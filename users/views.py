@@ -27,7 +27,7 @@ def token_vaqt(request, token):
 
 class UserViewSet(ModelViewSet):
     queryset = Users.objects.filter(is_superuser=False)
-    http_method_names = ['get', 'post', 'patch', 'delete']
+    http_method_names = ['get', 'post', 'patch']
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['username', 'role', 'fakultet']
 
@@ -40,4 +40,4 @@ class UserViewSet(ModelViewSet):
 class FakultetsViewSet(ModelViewSet):
     queryset = Fakultets.objects.all()
     serializer_class = FakultetsSerializer
-    http_method_names = ['get', 'post', 'patch']
+    http_method_names = ['get', 'post', 'patch', 'delete']
