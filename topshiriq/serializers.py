@@ -2,7 +2,7 @@ from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField
 from users.models import Users
 from users.middleware import get_current_request
 from users.choices import UserRoleChoice
-from topshiriq.models import Topshiriq, MajburiyTopshiriq, QoshimchaTopshiriq
+from topshiriq.models import Topshiriq, MajburiyTopshiriq, QoshimchaTopshiriq, OzSohasidaTopshiriq, OzXohishiBilanTopshiriq
 
 
 class SuperAdminMajburiyTopshiriqSerializer(ModelSerializer):
@@ -31,10 +31,13 @@ class AdminQoshimchaTopshiriqSerializer(ModelSerializer):
     class Meta:
         model = Topshiriq
         fields = [
-            'id', 'admin_user', 'topshiriq_users', 'max_baxo',
+            'id', 'topshiriq_users', 'max_baxo',
             'title', 'body', 'file1', 'file2', 'file3', 'file4', 
             'boshlanish_vaqti', 'tugash_vaqti'
         ]
+
+        
+# Topshirqlar
 
 class MajburiyTopshiriqSerializer(ModelSerializer):
     class Meta:
@@ -49,6 +52,22 @@ class QoshimchaTopshiriqSerializer(ModelSerializer):
         model = QoshimchaTopshiriq
         fields = [
             'id', 'user', 'topshiriq',
+            'title', 'body', 'file1', 'file2', 'file3', 'file4'
+        ]
+
+class OzSohasidaTopshiriqSerializer(ModelSerializer):
+    class Meta:
+        model = OzSohasidaTopshiriq
+        fields = [
+            'id', 'user',
+            'title', 'body', 'file1', 'file2', 'file3', 'file4'
+        ]
+
+class OzXohishiBilanTopshiriqSerializer(ModelSerializer):
+    class Meta:
+        model = OzXohishiBilanTopshiriq
+        fields = [
+            'id', 'user',
             'title', 'body', 'file1', 'file2', 'file3', 'file4'
         ]
 

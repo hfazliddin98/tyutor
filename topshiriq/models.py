@@ -60,3 +60,35 @@ class QoshimchaTopshiriq(AsosiyModel):
     def __str__(self):
         return self.title
 
+    
+class OzSohasidaTopshiriq(AsosiyModel):
+    user = models.ForeignKey(Users, on_delete=models.CASCADE) # tyutor uchun
+    baxo = models.IntegerField(default=0)
+    title = models.CharField(max_length=300, blank=True)
+    body = models.TextField(blank=True)
+    file1 = models.FileField(upload_to='topshiriq/qoshimcha', null=True, blank=True)
+    file2 = models.FileField(upload_to='topshiriq/qoshimcha', null=True, blank=True)
+    file3 = models.FileField(upload_to='topshiriq/qoshimcha', null=True, blank=True)
+    file4 = models.FileField(upload_to='topshiriq/qoshimcha', null=True, blank=True)
+    active = models.BooleanField(default=True)
+    baxolash = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.title
+
+    
+class OzXohishiBilanTopshiriq(AsosiyModel):
+    user = models.ForeignKey(Users, on_delete=models.CASCADE) # tyutor uchun
+    baxo = models.IntegerField(default=0)
+    title = models.CharField(max_length=300, blank=True)
+    body = models.TextField(blank=True)
+    file1 = models.FileField(upload_to='topshiriq/qoshimcha', null=True, blank=True)
+    file2 = models.FileField(upload_to='topshiriq/qoshimcha', null=True, blank=True)
+    file3 = models.FileField(upload_to='topshiriq/qoshimcha', null=True, blank=True)
+    file4 = models.FileField(upload_to='topshiriq/qoshimcha', null=True, blank=True)
+    active = models.BooleanField(default=True)
+    baxolash = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.title
+

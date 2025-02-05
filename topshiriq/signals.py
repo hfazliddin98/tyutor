@@ -1,4 +1,5 @@
-from django.db.models.signals import post_save, m2m_changed
+from django.db.models.signals import post_save, m2m_changed, pre_save
+from django.core.exceptions import ObjectDoesNotExist
 from users.middleware import get_current_request
 from django.dispatch import receiver
 from users.choices import UserRoleChoice
@@ -60,3 +61,15 @@ def task_users_added(sender, instance, action, **kwargs):
 
         # Signal ishlaganidan keyin flagni olib tashlaymiz
         processing_tasks.pop(instance.pk, None)
+
+
+
+# @receiver(pre_save, sender=MajburiyTopshiriq)
+# def create_topshiriq(sender, instance, created, **kwargs):
+#     if instance.pk:  # Faqat mavjud obyekt uchun ishlaydi (update bo'lsa)
+#         try:
+#             majburiy_topshiriq = sender.objects.get(pk=instance.pk)  # Eski ma'lumotni olish
+#             if majburiy_topshiriq.user.role == :  # O'zgarish bo'lganini tekshirish
+#                 print(f"Field o'zgardi: {old_instance.some_field} → {instance.some_field}")
+#         except ObjectDoesNotExist:
+#             pass  # Agar obyekt topilmasa, hech narsa qilmaymiz
