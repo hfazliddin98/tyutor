@@ -37,28 +37,28 @@ class MajburiyTopshiriqViewSet(ModelViewSet):
     serializer_class = MajburiyTopshiriqSerializer
     http_method_names = ['get', 'patch']
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['tur']
+    filterset_fields = ['active', 'baxolash', 'tur']
 
 class QoshimchaTopshiriqViewSet(ModelViewSet):
     queryset = QoshimchaTopshiriq.objects.all()
     serializer_class = QoshimchaTopshiriqSerializer
     http_method_names = ['get', 'patch']
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['id']
+    filterset_fields = ['active', 'baxolash']
 
 class OzSohasidaTopshiriqViewSet(ModelViewSet):
     queryset = OzSohasidaTopshiriq.objects.all()
     serializer_class = OzSohasidaTopshiriqSerializer
     http_method_names = ['get', 'post', 'patch', 'delete']
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['id']
+    filterset_fields = ['active', 'baxolash']
 
 class OzXohishiBilanTopshiriqViewSet(ModelViewSet):
     queryset = OzXohishiBilanTopshiriq.objects.all()
     serializer_class = OzXohishiBilanTopshiriqSerializer
     http_method_names = ['get', 'post', 'patch', 'delete']
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['id']
+    filterset_fields = ['active', 'baxolash']
 
 
 

@@ -4,7 +4,7 @@ from users.middleware import get_current_request
 from django.dispatch import receiver
 from users.choices import UserRoleChoice
 from topshiriq.choices import TopshiriqTuriChoice
-from topshiriq.models import Topshiriq, MajburiyTopshiriq, QoshimchaTopshiriq 
+from topshiriq.models import Topshiriq, MajburiyTopshiriq, QoshimchaTopshiriq, TestTopshiriq 
 
 
 
@@ -33,6 +33,7 @@ def task_users_added(sender, instance, action, **kwargs):
     if action == "post_add" and processing_tasks.get(instance.pk):
 
         if request.user.role == UserRoleChoice.SUPERADMIN:
+
             if instance.topshiriq_turi == TopshiriqTuriChoice.MAJBURIY:
                 for user in instance.topshiriq_users.all():
                     for _ in range(int(instance.topshiriq_soni)):
@@ -46,6 +47,14 @@ def task_users_added(sender, instance, action, **kwargs):
                 for user in instance.topshiriq_users.all():
                     for _ in range(int(instance.topshiriq_soni)):
                         QoshimchaTopshiriq.objects.create(
+                            user=user,  # To‘g‘ri foydalanuvchini saqlash
+                            topshiriq=instance
+                        )
+
+            if instance.topshiriq_turi == TopshiriqTuriChoice.TEST:
+                for user in instance.topshiriq_users.all():
+                    for _ in range(int(instance.topshiriq_soni)):
+                        TestTopshiriq.objects.create(
                             user=user,  # To‘g‘ri foydalanuvchini saqlash
                             topshiriq=instance
                         )
