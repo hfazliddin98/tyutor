@@ -26,6 +26,15 @@ class SuperAdminQoshimchaTopshiriqSerializer(ModelSerializer):
             'boshlanish_vaqti', 'tugash_vaqti'
         ]
 
+class SuperAdminTestTopshiriqSerializer(ModelSerializer):
+    topshiriq_users = PrimaryKeyRelatedField(queryset=Users.objects.all(), many=True)  # many=True kerak!
+    class Meta:
+        model = Topshiriq
+        fields = [
+            'id', 'topshiriq_users','test_file', 
+            'boshlanish_vaqti', 'tugash_vaqti'
+        ]
+
 class AdminQoshimchaTopshiriqSerializer(ModelSerializer):
     topshiriq_users = PrimaryKeyRelatedField(queryset=Users.objects.all(), many=True)  # many=True kerak!
     class Meta:
