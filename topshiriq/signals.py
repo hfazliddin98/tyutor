@@ -4,7 +4,7 @@ from users.middleware import get_current_request
 from django.dispatch import receiver
 from users.choices import UserRoleChoice
 from topshiriq.choices import TopshiriqTuriChoice
-from topshiriq.models import Topshiriq, MajburiyTopshiriq, QoshimchaTopshiriq, TestTopshiriq 
+from topshiriq.models import Topshiriq, MajburiyTopshiriq, QoshimchaTopshiriq
 
 
 
@@ -20,7 +20,6 @@ def create_topshiriq(sender, instance, created, **kwargs):
         if request and request.user:  # Request mavjudligini tekshiramiz
             instance.admin_user = request.user  # Admin userni saqlaymiz
             instance.save(update_fields=["admin_user"])  # O‘zgarishni saqlaymiz
-            print(f"Topshiriq yaratildi: {instance.id}, Admin: {request.user.username}")
         
         # Flag qo‘yamiz, shunda m2m_changed signalidan foydalanish mumkin bo‘ladi
         processing_tasks[instance.pk] = True
@@ -39,7 +38,7 @@ def task_users_added(sender, instance, action, **kwargs):
                     for _ in range(int(instance.topshiriq_soni)):
                         MajburiyTopshiriq.objects.create(
                             user=user,  # To‘g‘ri foydalanuvchini saqlash
-                            topshiriq=instance,  # ID emas, obyektning o‘zi
+                            topshiriq=instance, 
                             tur=instance.majburiy_topshiriq_turi
                         )
 
@@ -51,13 +50,7 @@ def task_users_added(sender, instance, action, **kwargs):
                             topshiriq=instance
                         )
 
-            if instance.topshiriq_turi == TopshiriqTuriChoice.TEST:
-                for user in instance.topshiriq_users.all():
-                    for _ in range(int(instance.topshiriq_soni)):
-                        TestTopshiriq.objects.create(
-                            user=user,  # To‘g‘ri foydalanuvchini saqlash
-                            topshiriq=instance
-                        )
+
 
         if request.user.role == UserRoleChoice.ADMIN:
             if instance.topshiriq_turi == TopshiriqTuriChoice.QOSHIMCHA:
@@ -72,13 +65,3 @@ def task_users_added(sender, instance, action, **kwargs):
         processing_tasks.pop(instance.pk, None)
 
 
-
-# @receiver(pre_save, sender=MajburiyTopshiriq)
-# def create_topshiriq(sender, instance, created, **kwargs):
-#     if instance.pk:  # Faqat mavjud obyekt uchun ishlaydi (update bo'lsa)
-#         try:
-#             majburiy_topshiriq = sender.objects.get(pk=instance.pk)  # Eski ma'lumotni olish
-#             if majburiy_topshiriq.user.role == :  # O'zgarish bo'lganini tekshirish
-#                 print(f"Field o'zgardi: {old_instance.some_field} → {instance.some_field}")
-#         except ObjectDoesNotExist:
-#             pass  # Agar obyekt topilmasa, hech narsa qilmaymiz

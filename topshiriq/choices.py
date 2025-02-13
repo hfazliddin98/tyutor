@@ -4,7 +4,7 @@ from django.db import models
 class TopshiriqTuriChoice(models.TextChoices):
     MAJBURIY = ("majburiy", "majburiy")
     QOSHIMCHA = ("qoshimcha", "qoshimcha")
-    TEST = ("test", "test")
+
 
 
 class MajburiyTopshiriqTuriChoice(models.TextChoices):
@@ -16,5 +16,5 @@ class MajburiyTopshiriqTuriChoice(models.TextChoices):
     TTJDA_TADBIR = ("ttjda_tadbir", "ttjda_tadbir")
     IQDIDORLI_TALABAM = ("iqtidorli_talabam", "iqtidorli_talabam")
     OILAGA_XAT = ("oilaga_xat", "oilaga_xat")
-
+    TEST = ("test", "test")
 

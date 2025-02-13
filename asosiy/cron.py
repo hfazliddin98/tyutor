@@ -6,3 +6,4 @@ def my_backup_file():
     call_command('mediabackup')
   except:
     pass
+

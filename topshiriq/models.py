@@ -26,7 +26,7 @@ class  Topshiriq(AsosiyModel):
     def __str__(self):
         return self.title
     
-class MajburiyTopshiriq(AsosiyModel):
+class MajburiyTopshiriq(AsosiyModel): 
     user = models.ForeignKey(Users, on_delete=models.CASCADE) # tyutor uchun
     topshiriq = models.ForeignKey(Topshiriq, on_delete=models.CASCADE)
     tur = models.CharField(max_length=30, choices=MajburiyTopshiriqTuriChoice.choices)
@@ -60,17 +60,7 @@ class QoshimchaTopshiriq(AsosiyModel):
 
     def __str__(self):
         return self.title
-    
-class TestTopshiriq(AsosiyModel):
-    user = models.ForeignKey(Users, on_delete=models.CASCADE) # tyutor uchun
-    topshiriq = models.ForeignKey(Topshiriq, on_delete=models.CASCADE)
-    baxo = models.IntegerField(default=0)
-    title = models.CharField(max_length=300, blank=True)
-    active = models.BooleanField(default=True)
-    baxolash = models.BooleanField(default=False)
 
-    def __str__(self):
-        return self.title
 
     
 class OzSohasidaTopshiriq(AsosiyModel):
@@ -103,4 +93,5 @@ class OzXohishiBilanTopshiriq(AsosiyModel):
 
     def __str__(self):
         return self.title
+    
 

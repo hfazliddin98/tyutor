@@ -26,6 +26,7 @@ CSRF_TRUSTED_ORIGINS=[f'https://{DOMEN}', f'http://{DOMEN}']
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django_crontab',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -39,6 +40,8 @@ INSTALLED_APPS = [
     'drf_yasg',
     'corsheaders',
     'dbbackup', 
+
+    'django_celery_beat',
 
     # men qoshgan app
     'users',
@@ -103,10 +106,41 @@ REST_FRAMEWORK = {
 
 }
 
+# CELERY
+
+import os
+
+# Redis broker (Celery vazifalarni boshqarishi uchun Redis ishlatiladi)
 CELERY_BROKER_URL = 'redis://localhost:6379/0'
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_TASK_SERIALIZER = 'json'
+
+# Vazifalarni saqlash uchun backend
 CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+
+# Timezone sozlamalari
+CELERY_TIMEZONE = 'UTC'
+
+# Harakatni qayta urinishlar soni
+CELERY_TASK_ACKS_LATE = True
+CELERY_TASK_REJECT_ON_WORKER_LOST = True
+CELERY_TASK_TRACK_STARTED = True
+
+
+
+# Celery Beat vazifalar jadvali
+from celery.schedules import timedelta
+
+CELERY_BEAT_SCHEDULE = {
+    'xabar': {
+        'task': 'asosiy.tasks.xabar_message',
+        'schedule': timedelta(seconds=2),
+    },
+}
+
+
+# CELERY_BROKER_URL = 'redis://localhost:6379/0'
+# CELERY_ACCEPT_CONTENT = ['json']
+# CELERY_TASK_SERIALIZER = 'json'
+# CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 
 
 CORS_ALLOWED_ORIGINS = [
@@ -245,4 +279,99 @@ CRONJOBS = [
 ]
 
 
+
 AUTH_USER_MODEL = 'users.Users' 
+
+
+JAZZMIN_SETTINGS = {
+    # title of the window (Will default to current_admin_site.site_title if absent or None)
+    "site_title": "Kokand",
+
+    # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
+    "site_header": "Kokand",
+
+    # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
+    "site_brand": "Kokand",
+
+    # Welcome text on the login screen
+    "welcome_sign": "Kokand",
+
+    # Copyright on the footer
+    "copyright": "Kokand IT Park Ltd",
+
+   
+    #############
+    # User Menu #
+    #############
+
+    # Additional links to include in the user menu on the top right ("app" url type is not allowed)
+    "usermenu_links": [
+        {"model": "auth.user"}
+    ],
+
+    #############
+    # Side Menu #
+    #############
+
+    # Whether to display the side menu
+    "show_sidebar": True,
+
+    # Whether to aut expand the menu
+    "navigation_expanded": True,
+
+    # Hide these apps when generating side menu e.g (auth)
+    "hide_apps": [],
+
+    # Hide these models when generating side menu (e.g auth.user)
+    "hide_models": [],
+
+    # List of apps (and/or models) to base side menu ordering off of (does not need to contain all apps/models)
+    "order_with_respect_to": ["auth", "books", "books.author", "books.book"],
+
+    # Custom links to append to app groups, keyed on app name
+    "custom_links": {
+        "books": [{
+            "name": "Make Messages", 
+            "url": "make_messages", 
+            "icon": "fas fa-comments",
+            "permissions": ["books.view_book"]
+        }]
+    },
+
+    # Custom icons for side menu apps/models See https://fontawesome.com/icons?d=gallery&m=free&v=5.0.0,5.0.1,5.0.10,5.0.11,5.0.12,5.0.13,5.0.2,5.0.3,5.0.4,5.0.5,5.0.6,5.0.7,5.0.8,5.0.9,5.1.0,5.1.1,5.2.0,5.3.0,5.3.1,5.4.0,5.4.1,5.4.2,5.13.0,5.12.0,5.11.2,5.11.1,5.10.0,5.9.0,5.8.2,5.8.1,5.7.2,5.7.1,5.7.0,5.6.3,5.5.0,5.4.2
+    # for the full list of 5.13.0 free icon classes
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+    },
+    # Icons that are used when one is not manually specified
+    "default_icon_parents": "fas fa-chevron-circle-right",
+    "default_icon_children": "fas fa-circle",
+
+    #################
+    # Related Modal #
+    #################
+    # Use modals instead of popups
+    "related_modal_active": False,
+
+ 
+    # Whether to link font from fonts.googleapis.com (use custom_css to supply font otherwise)
+    "use_google_fonts_cdn": True,
+    # Whether to show the UI customizer on the sidebar
+    "show_ui_builder": False,
+
+    ###############
+    # Change view #
+    ###############
+    # Render out the change view as a single form, or in tabs, current options are
+    # - single
+    # - horizontal_tabs (default)
+    # - vertical_tabs
+    # - collapsible
+    # - carousel
+    "changeform_format": "horizontal_tabs",
+    # override change forms on a per modeladmin basis
+    "changeform_format_overrides": {"auth.user": "collapsible", "auth.group": "vertical_tabs"},
+
+}

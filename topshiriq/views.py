@@ -7,7 +7,6 @@ from topshiriq.models import OzSohasidaTopshiriq, OzXohishiBilanTopshiriq
 from topshiriq.serializers import MajburiyTopshiriqSerializer, QoshimchaTopshiriqSerializer
 from topshiriq.serializers import OzSohasidaTopshiriqSerializer, OzXohishiBilanTopshiriqSerializer
 from topshiriq.serializers import SuperAdminMajburiyTopshiriqSerializer, SuperAdminQoshimchaTopshiriqSerializer,AdminQoshimchaTopshiriqSerializer
-from topshiriq.serializers import SuperAdminTestTopshiriqSerializer
 
 
 
@@ -25,12 +24,7 @@ class SuperAdminQoshimchaTopshiriqViewSet(ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['active']
 
-class SuperAdminTestTopshiriqViewSet(ModelViewSet):
-    queryset = Topshiriq.objects.filter(admin_user__role=UserRoleChoice.SUPERADMIN).filter(topshiriq_turi=TopshiriqTuriChoice.TEST)
-    serializer_class = SuperAdminTestTopshiriqSerializer
-    http_method_names = ['get', 'post', 'patch', 'delete']
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['active']
+
 
 class AdminQoshimchaTopshiriqViewSet(ModelViewSet):
     queryset = Topshiriq.objects.filter(admin_user__role=UserRoleChoice.ADMIN).filter(topshiriq_turi=TopshiriqTuriChoice.QOSHIMCHA)

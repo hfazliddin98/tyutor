@@ -7,3 +7,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'asosiy.settings')
 app = Celery('asosiy')
 app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()
+
+
+
+

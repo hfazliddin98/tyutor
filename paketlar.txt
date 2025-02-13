@@ -10,6 +10,7 @@ xhtml2pdf
 psycopg2-binary
 django-dbbackup
 django-crontab
+django-jazzmin
 coreschema
 dj-rest-auth
 django-cors-headers
