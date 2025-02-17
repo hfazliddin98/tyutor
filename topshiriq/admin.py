@@ -5,7 +5,7 @@ from topshiriq.models import Topshiriq, MajburiyTopshiriq, QoshimchaTopshiriq
 
 @admin.register(Topshiriq)
 class TopshiriqAdmin(admin.ModelAdmin):
-    list_display  = ['title']
+    list_display  = ['title', 'active', 'vaqt_tugadi']
 
 @admin.register(MajburiyTopshiriq)
 class MajburiyTopshiriqAdmin(admin.ModelAdmin):

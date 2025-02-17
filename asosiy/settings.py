@@ -19,7 +19,7 @@ DEBUG = True
 DOMEN = 'tyutr.pythonanywhere.com'
 LOCAL_DOMEN = '127.0.0.1'
 
-ALLOWED_HOSTS = ['.kokanddeveloper.uz', DOMEN, 'localhost', LOCAL_DOMEN]
+ALLOWED_HOSTS = [DOMEN, LOCAL_DOMEN, 'localhost']
 CSRF_TRUSTED_ORIGINS=[f'https://{DOMEN}', f'http://{DOMEN}']
 
 
@@ -40,8 +40,6 @@ INSTALLED_APPS = [
     'drf_yasg',
     'corsheaders',
     'dbbackup', 
-
-    'django_celery_beat',
 
     # men qoshgan app
     'users',
@@ -106,41 +104,7 @@ REST_FRAMEWORK = {
 
 }
 
-# CELERY
 
-import os
-
-# Redis broker (Celery vazifalarni boshqarishi uchun Redis ishlatiladi)
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
-
-# Vazifalarni saqlash uchun backend
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
-
-# Timezone sozlamalari
-CELERY_TIMEZONE = 'UTC'
-
-# Harakatni qayta urinishlar soni
-CELERY_TASK_ACKS_LATE = True
-CELERY_TASK_REJECT_ON_WORKER_LOST = True
-CELERY_TASK_TRACK_STARTED = True
-
-
-
-# Celery Beat vazifalar jadvali
-from celery.schedules import timedelta
-
-CELERY_BEAT_SCHEDULE = {
-    'xabar': {
-        'task': 'asosiy.tasks.xabar_message',
-        'schedule': timedelta(seconds=2),
-    },
-}
-
-
-# CELERY_BROKER_URL = 'redis://localhost:6379/0'
-# CELERY_ACCEPT_CONTENT = ['json']
-# CELERY_TASK_SERIALIZER = 'json'
-# CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 
 
 CORS_ALLOWED_ORIGINS = [
@@ -275,7 +239,7 @@ DBBACKUP_STORAGE_OPTIONS = {'location': BASE_DIR / "backup"}
 # auto backup
 
 CRONJOBS = [ 
-    ('00 23 * * *', 'asosiy.cron.my_backup_file')
+    ('00 23 * * *', 'asosiy.cron.my_backup_file'), 
 ]
 
 

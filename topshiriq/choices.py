@@ -4,6 +4,7 @@ from django.db import models
 class TopshiriqTuriChoice(models.TextChoices):
     MAJBURIY = ("majburiy", "majburiy")
     QOSHIMCHA = ("qoshimcha", "qoshimcha")
+    OZ_SOHASIDA = ("oz_sohasida", "oz_sohasida")
 
 
 

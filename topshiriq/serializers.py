@@ -6,39 +6,57 @@ from users.serializers import FakultetsSerializer
 from topshiriq.models import Topshiriq, MajburiyTopshiriq, QoshimchaTopshiriq, OzSohasidaTopshiriq, OzXohishiBilanTopshiriq
 
 
+# Superadmin
+
 class SuperAdminMajburiyTopshiriqSerializer(ModelSerializer):
     topshiriq_users = PrimaryKeyRelatedField(queryset=Users.objects.all(), many=True)  # many=True kerak!
     class Meta:
         model = Topshiriq
         fields = [
-            'id', 'topshiriq_users', 
+            'id', 'topshiriq_users', 'topshiriq_turi',
             'majburiy_topshiriq_turi', 'topshiriq_soni', 'max_baxo',
             'title', 'body', 'file1', 'file2', 'file3', 'file4', 
             'boshlanish_vaqti', 'tugash_vaqti'
         ]
+        read_only_fields = ['topshiriq_turi']
+        
 
 class SuperAdminQoshimchaTopshiriqSerializer(ModelSerializer):
     topshiriq_users = PrimaryKeyRelatedField(queryset=Users.objects.all(), many=True)  # many=True kerak!
     class Meta:
         model = Topshiriq
         fields = [
-            'id', 'topshiriq_users', 'max_baxo',
+            'id', 'topshiriq_users', 'topshiriq_turi', 'max_baxo',
             'title', 'body', 'file1', 'file2', 'file3', 'file4', 
             'boshlanish_vaqti', 'tugash_vaqti'
         ]
+        read_only_fields = ['topshiriq_turi']
+
+class SuperAdminOzSohasidaTopshiriqSerializer(ModelSerializer):
+    topshiriq_users = PrimaryKeyRelatedField(queryset=Users.objects.all(), many=True)  # many=True kerak!
+    class Meta:
+        model = Topshiriq
+        fields = [
+            'id', 'topshiriq_users', 'topshiriq_turi', 'max_baxo',
+            'title', 'body', 'file1', 'file2', 'file3', 'file4', 
+            'boshlanish_vaqti', 'tugash_vaqti'
+        ]
+        read_only_fields = ['topshiriq_turi']
 
 
+# Admin
 
 class AdminQoshimchaTopshiriqSerializer(ModelSerializer):
     topshiriq_users = PrimaryKeyRelatedField(queryset=Users.objects.all(), many=True)  # many=True kerak!
     class Meta:
         model = Topshiriq
         fields = [
-            'id', 'topshiriq_users', 'max_baxo',
+            'id', 'topshiriq_users', 'topshiriq_turi', 'max_baxo',
             'title', 'body', 'file1', 'file2', 'file3', 'file4', 
             'boshlanish_vaqti', 'tugash_vaqti'
         ]
-
+        read_only_fields = ['topshiriq_turi']
+        
         
 # Topshirqlar
 class TopshiriqUserSerializer(ModelSerializer):
@@ -60,6 +78,7 @@ class TopshiriqSerializer(ModelSerializer):
 
 class MajburiyTopshiriqSerializer(ModelSerializer):
     user = TopshiriqUserSerializer()
+    topshiriq = TopshiriqSerializer()
     class Meta:
         model = MajburiyTopshiriq
         fields = [
@@ -68,6 +87,8 @@ class MajburiyTopshiriqSerializer(ModelSerializer):
         ]
 
 class QoshimchaTopshiriqSerializer(ModelSerializer):
+    user = TopshiriqUserSerializer()
+    topshiriq = TopshiriqSerializer()
     class Meta:
         model = QoshimchaTopshiriq
         fields = [
@@ -76,14 +97,17 @@ class QoshimchaTopshiriqSerializer(ModelSerializer):
         ]
 
 class OzSohasidaTopshiriqSerializer(ModelSerializer):
+    user = TopshiriqUserSerializer()
+    topshiriq = TopshiriqSerializer()
     class Meta:
         model = OzSohasidaTopshiriq
         fields = [
-            'id', 'user',
+            'id', 'user', 'topshiriq',
             'title', 'body', 'file1', 'file2', 'file3', 'file4'
         ]
 
 class OzXohishiBilanTopshiriqSerializer(ModelSerializer):
+    user = TopshiriqUserSerializer()
     class Meta:
         model = OzXohishiBilanTopshiriq
         fields = [

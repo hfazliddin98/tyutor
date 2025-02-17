@@ -19,7 +19,8 @@ class  Topshiriq(AsosiyModel):
     file3 = models.FileField(upload_to='topshiriq/topshiriq', null=True, blank=True)
     file4 = models.FileField(upload_to='topshiriq/topshiriq', null=True, blank=True)
     test_file = models.FileField(upload_to='topshiriq/topshiriq/test', null=True, blank=True)
-    active = models.BooleanField(default=True)
+    active = models.BooleanField(default=False)
+    vaqt_tugadi = models.BooleanField(default=False)
     boshlanish_vaqti = models.DateField()
     tugash_vaqti = models.DateField()
 
@@ -37,7 +38,6 @@ class MajburiyTopshiriq(AsosiyModel):
     file2 = models.FileField(upload_to='topshiriq/majburiy', null=True, blank=True)
     file3 = models.FileField(upload_to='topshiriq/majburiy', null=True, blank=True)
     file4 = models.FileField(upload_to='topshiriq/majburiy', null=True, blank=True)
-    active = models.BooleanField(default=True)
     baxolash = models.BooleanField(default=False)
 
         
@@ -55,7 +55,6 @@ class QoshimchaTopshiriq(AsosiyModel):
     file2 = models.FileField(upload_to='topshiriq/qoshimcha', null=True, blank=True)
     file3 = models.FileField(upload_to='topshiriq/qoshimcha', null=True, blank=True)
     file4 = models.FileField(upload_to='topshiriq/qoshimcha', null=True, blank=True)
-    active = models.BooleanField(default=True)
     baxolash = models.BooleanField(default=False)
 
     def __str__(self):
@@ -65,6 +64,7 @@ class QoshimchaTopshiriq(AsosiyModel):
     
 class OzSohasidaTopshiriq(AsosiyModel):
     user = models.ForeignKey(Users, on_delete=models.CASCADE) # tyutor uchun
+    topshiriq = models.ForeignKey(Topshiriq, on_delete=models.CASCADE)
     baxo = models.IntegerField(default=0)
     title = models.CharField(max_length=300, blank=True)
     body = models.TextField(blank=True)
@@ -72,7 +72,6 @@ class OzSohasidaTopshiriq(AsosiyModel):
     file2 = models.FileField(upload_to='topshiriq/qoshimcha', null=True, blank=True)
     file3 = models.FileField(upload_to='topshiriq/qoshimcha', null=True, blank=True)
     file4 = models.FileField(upload_to='topshiriq/qoshimcha', null=True, blank=True)
-    active = models.BooleanField(default=True)
     baxolash = models.BooleanField(default=False)
 
     def __str__(self):
@@ -88,7 +87,6 @@ class OzXohishiBilanTopshiriq(AsosiyModel):
     file2 = models.FileField(upload_to='topshiriq/qoshimcha', null=True, blank=True)
     file3 = models.FileField(upload_to='topshiriq/qoshimcha', null=True, blank=True)
     file4 = models.FileField(upload_to='topshiriq/qoshimcha', null=True, blank=True)
-    active = models.BooleanField(default=True)
     baxolash = models.BooleanField(default=False)
 
     def __str__(self):
