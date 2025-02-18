@@ -16,7 +16,7 @@ SECRET_KEY = 'django-insecure-zz4a1*6kqzl5cpd=72us5tmoc-4r$&q@qg1axnft!6bk+k3gv3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-DOMEN = 'tyutr.pythonanywhere.com'
+DOMEN = 'tyutorapi.kspi.uz'
 LOCAL_DOMEN = '127.0.0.1'
 
 ALLOWED_HOSTS = [DOMEN, LOCAL_DOMEN, 'localhost']
