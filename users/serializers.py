@@ -1,26 +1,40 @@
 from rest_framework import serializers
-from .models import Users, Fakultets
+from .models import Users, Fakultet, Yonalish, Kurs, Guruh
 
 
-class FakultetsSerializer(serializers.ModelSerializer):
+class FakultetSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Fakultets
+        model = Fakultet
         fields = ['id', 'name']
+
+class YonalishSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Yonalish
+        fields = ['id', 'fakultet', 'name']
+
+class KursSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Kurs
+        fields = ['id', 'yonalish', 'name']
+
+class GuruhSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Guruh
+        fields = ['id', 'kurs', 'name']
 
 
 
 class UserGetSerializer(serializers.ModelSerializer):
-    fakultet = FakultetsSerializer()  # Faqatgina GET uchun detallarni ko'rsatadi
 
     class Meta:
         model = Users
-        fields = ['id', 'username', 'first_name', 'last_name', 'role', 'fakultet', 'rasm', 'parol', 'is_active']
+        fields = ['id', 'username', 'first_name', 'last_name', 'role', 'guruh', 'rasm', 'parol', 'is_active']
 
 
 class UserPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Users
-        fields = ['id','username', 'first_name', 'last_name', 'role', 'fakultet', 'password', 'is_active']
+        fields = ['id','username', 'first_name', 'last_name', 'role', 'guruh', 'password', 'is_active']
         extra_kwargs = {'password': {'write_only': True}}  # Parolni API javobida chiqarilmasligi uchun
 
     def create(self, validated_data):

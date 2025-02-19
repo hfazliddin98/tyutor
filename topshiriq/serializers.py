@@ -2,7 +2,7 @@ from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField
 from users.models import Users
 from users.middleware import get_current_request
 from users.choices import UserRoleChoice
-from users.serializers import FakultetsSerializer
+from users.serializers import FakultetSerializer
 from topshiriq.models import Topshiriq, MajburiyTopshiriq, QoshimchaTopshiriq, OzSohasidaTopshiriq, OzXohishiBilanTopshiriq
 
 
@@ -60,7 +60,7 @@ class AdminQoshimchaTopshiriqSerializer(ModelSerializer):
         
 # Topshirqlar
 class TopshiriqUserSerializer(ModelSerializer):
-    fakultet = FakultetsSerializer()  # Faqatgina GET uchun detallarni ko'rsatadi
+    fakultet = FakultetSerializer()  # Faqatgina GET uchun detallarni ko'rsatadi
 
     class Meta:
         model = Users

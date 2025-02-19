@@ -1,19 +1,37 @@
 from django.contrib import admin
 from django.contrib.auth.models import Group
-from users.models import Users, Fakultets
+from users.models import Users, Fakultet, Yonalish, Kurs, Guruh
 
 @admin.register(Users)
 class UserAdmin(admin.ModelAdmin):
     list_display  = [
-        'id','username', 'first_name', 'last_name',
+        'username', 'first_name', 'last_name', 'role',
         'is_superuser', 'is_active'
     ]
 
 
-@admin.register(Fakultets)
-class FakultetsAdmin(admin.ModelAdmin):
+@admin.register(Fakultet)
+class FakultetAdmin(admin.ModelAdmin):
     list_display  = [
         'name', 
+    ]
+
+@admin.register(Yonalish)
+class YonalishAdmin(admin.ModelAdmin):
+    list_display  = [
+        'fakultet__name','name', 
+    ]
+
+@admin.register(Kurs)
+class KursAdmin(admin.ModelAdmin):
+    list_display  = [
+        'yonalish__fakultet__name', 'yonalish__name', 'name', 
+    ]
+
+@admin.register(Guruh)
+class GuruhAdmin(admin.ModelAdmin):
+    list_display  = [
+        'kurs__yonalish__fakultet__name', 'kurs__yonalish__name', 'name', 
     ]
     
 

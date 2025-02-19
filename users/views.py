@@ -5,8 +5,9 @@ from django.http import HttpResponse
 from rest_framework_simplejwt.tokens import AccessToken
 from datetime import datetime, timezone, timedelta
 from rest_framework.viewsets import ModelViewSet
-from .models import Users,Fakultets
-from .serializers import UserGetSerializer, UserPostSerializer, FakultetsSerializer
+from .models import Users,Fakultet, Yonalish, Kurs, Guruh
+from .serializers import UserGetSerializer, UserPostSerializer
+from .serializers import FakultetSerializer, YonalishSerializer, KursSerializer, GuruhSerializer
 
 
 @csrf_exempt
@@ -37,7 +38,22 @@ class UserViewSet(ModelViewSet):
         return UserPostSerializer  # POST, PUT, PATCH uchun
 
 
-class FakultetsViewSet(ModelViewSet):
-    queryset = Fakultets.objects.all()
-    serializer_class = FakultetsSerializer
+class FakultetViewSet(ModelViewSet):
+    queryset = Fakultet.objects.all()
+    serializer_class = FakultetSerializer
+    http_method_names = ['get', 'post', 'patch', 'delete']
+
+class YonalishViewSet(ModelViewSet):
+    queryset = Yonalish.objects.all()
+    serializer_class = YonalishSerializer
+    http_method_names = ['get', 'post', 'patch', 'delete']
+
+class KursViewSet(ModelViewSet):
+    queryset = Kurs.objects.all()
+    serializer_class = KursSerializer
+    http_method_names = ['get', 'post', 'patch', 'delete']
+
+class GuruhViewSet(ModelViewSet):
+    queryset = Guruh.objects.all()
+    serializer_class = GuruhSerializer
     http_method_names = ['get', 'post', 'patch', 'delete']
