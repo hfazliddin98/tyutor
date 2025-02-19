@@ -1,6 +1,6 @@
 media/
-# muhit/
-# db.sqlite3
+muhit/
+db.sqlite3
 __pycache__/
 .Pipfile
 *.ipynb
