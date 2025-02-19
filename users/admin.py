@@ -19,19 +19,19 @@ class FakultetAdmin(admin.ModelAdmin):
 @admin.register(Yonalish)
 class YonalishAdmin(admin.ModelAdmin):
     list_display  = [
-        'fakultet__name','name', 
+        'name', 
     ]
 
 @admin.register(Kurs)
 class KursAdmin(admin.ModelAdmin):
     list_display  = [
-        'yonalish__fakultet__name', 'yonalish__name', 'name', 
+        'name', 
     ]
 
 @admin.register(Guruh)
 class GuruhAdmin(admin.ModelAdmin):
     list_display  = [
-        'kurs__yonalish__fakultet__name', 'kurs__yonalish__name', 'name', 
+        'name', 
     ]
     
 
