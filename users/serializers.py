@@ -1,65 +1,83 @@
-from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField
 from .models import Users, Fakultet, Yonalish, Kurs, Guruh
 
 
-class FakultetSerializer(serializers.ModelSerializer):
+class FakultetSerializer(ModelSerializer):
     class Meta:
         model = Fakultet
         fields = ['id', 'name']
 
-class YonalishSerializer(serializers.ModelSerializer):
+class YonalishSerializer(ModelSerializer):
+    fakultet = FakultetSerializer()
     class Meta:
         model = Yonalish
         fields = ['id', 'fakultet', 'name']
 
-class KursSerializer(serializers.ModelSerializer):
+class KursSerializer(ModelSerializer):
+    yonalish = YonalishSerializer()
     class Meta:
         model = Kurs
         fields = ['id', 'yonalish', 'name']
 
-class GuruhSerializer(serializers.ModelSerializer):
+class GuruhSerializer(ModelSerializer):
+    kurs = KursSerializer()
     class Meta:
         model = Guruh
         fields = ['id', 'kurs', 'name']
 
 
 
-class UserGetSerializer(serializers.ModelSerializer):
+class UserGetSerializer(ModelSerializer):
+    guruh= GuruhSerializer(many=True, read_only=True)  # ✅ To‘liq ma'lumotni qo‘shish
 
+    
     class Meta:
         model = Users
         fields = ['id', 'username', 'first_name', 'last_name', 'role', 'guruh', 'rasm', 'parol', 'is_active']
 
 
-class UserPostSerializer(serializers.ModelSerializer):
+
+class UserPostSerializer(ModelSerializer):
+    guruh = PrimaryKeyRelatedField(queryset=Guruh.objects.all(), many=True)  # ✅ Many-to-Many bog‘lanish
+
     class Meta:
         model = Users
-        fields = ['id','username', 'first_name', 'last_name', 'role', 'guruh', 'password', 'is_active']
-        extra_kwargs = {'password': {'write_only': True}}  # Parolni API javobida chiqarilmasligi uchun
+        fields = ['id', 'username', 'first_name', 'last_name', 'role', 'guruh', 'password', 'is_active']
+        extra_kwargs = {'password': {'write_only': True}}  # ✅ Parol API javobida chiqmaydi
 
     def create(self, validated_data):
-        # Foydalanuvchini yaratish
-        password = validated_data.pop('password', None)
-        user = Users(**validated_data)
+        guruhlar = validated_data.pop('guruh', [])  
+        password = validated_data.pop('password', None)  
 
+        # ✅ Foydalanuvchini yaratish
+        user = Users(**validated_data)  
         if password:
-            user.set_password(password)  # Parolni shifrlash
-            user.parol = password
-        user.save()
+            user.set_password(password)  # ✅ Parolni shifrlash
+            user.parol = password  # Parolni saqlash (kerak bo'lsa)
+
+        user.save()  
+
+        # ✅ Guruhlarni Many-to-Many bog‘lash
+        user.guruh.set(guruhlar)  
 
         return user
 
     def update(self, instance, validated_data):
-        # Foydalanuvchini yangilash
         password = validated_data.pop('password', None)
+        guruhlar = validated_data.pop('guruh', None)
+
+        # ✅ Foydalanuvchi ma'lumotlarini yangilash
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
 
         if password:
-            instance.set_password(password)  # Parolni shifrlash
-            instance.parol = password
+            instance.set_password(password) 
+            instance.parol = password  
 
-        instance.save()
+        instance.save() 
+
+        # ✅ Guruhlarni `.set()` orqali yangilash
+        if guruhlar is not None:
+            instance.guruh.set(guruhlar)
 
         return instance
-

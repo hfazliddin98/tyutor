@@ -12,5 +12,5 @@ django-filter
 djangorestframework
 djangorestframework-simplejwt
 drf-yasg
-
+requests
 apscheduler

@@ -37,6 +37,7 @@ INSTALLED_APPS = [
 
     # app
     'rest_framework',
+    'django_filters',
     'drf_yasg',
     'corsheaders',
     'dbbackup', 
@@ -87,7 +88,7 @@ WSGI_APPLICATION = 'asosiy.wsgi.application'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly', # foydalanuvchilar uchun ruhsatlar
+        'rest_framework.permissions.IsAuthenticated', # foydalanuvchilar uchun ruhsatlar
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -99,6 +100,10 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': [
         'django_filters.rest_framework.DjangoFilterBackend'
     ],
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',  
+    ),
     # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     # 'PAGE_SIZE': 120
 
