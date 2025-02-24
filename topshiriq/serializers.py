@@ -76,7 +76,7 @@ class TopshiriqSerializer(ModelSerializer):
         ]
 
 
-class MajburiyTopshiriqSerializer(ModelSerializer):
+class MajburiyTopshiriqGetSerializer(ModelSerializer):
     user = TopshiriqUserSerializer()
     topshiriq = TopshiriqSerializer()
     class Meta:
@@ -86,7 +86,14 @@ class MajburiyTopshiriqSerializer(ModelSerializer):
             'title', 'body', 'file1', 'file2', 'file3', 'file4'
         ]
 
-class QoshimchaTopshiriqSerializer(ModelSerializer):
+class MajburiyTopshiriqPostSerializer(ModelSerializer):
+    class Meta:
+        model = MajburiyTopshiriq
+        fields = [
+            'title', 'body', 'file1', 'file2', 'file3', 'file4'
+        ]
+
+class QoshimchaTopshiriqGetSerializer(ModelSerializer):
     user = TopshiriqUserSerializer()
     topshiriq = TopshiriqSerializer()
     class Meta:
@@ -96,7 +103,14 @@ class QoshimchaTopshiriqSerializer(ModelSerializer):
             'title', 'body', 'file1', 'file2', 'file3', 'file4'
         ]
 
-class OzSohasidaTopshiriqSerializer(ModelSerializer):
+class QoshimchaTopshiriqPostSerializer(ModelSerializer):
+    class Meta:
+        model = QoshimchaTopshiriq
+        fields = [
+            'title', 'body', 'file1', 'file2', 'file3', 'file4'
+        ]
+
+class OzSohasidaTopshiriqGetSerializer(ModelSerializer):
     user = TopshiriqUserSerializer()
     topshiriq = TopshiriqSerializer()
     class Meta:
@@ -106,13 +120,28 @@ class OzSohasidaTopshiriqSerializer(ModelSerializer):
             'title', 'body', 'file1', 'file2', 'file3', 'file4'
         ]
 
-class OzXohishiBilanTopshiriqSerializer(ModelSerializer):
+class OzSohasidaTopshiriqPostSerializer(ModelSerializer):
+
+    class Meta:
+        model = OzSohasidaTopshiriq
+        fields = [
+            'title', 'body', 'file1', 'file2', 'file3', 'file4'
+        ]
+
+class OzXohishiBilanTopshiriqGetSerializer(ModelSerializer):
     user = TopshiriqUserSerializer()
     class Meta:
         model = OzXohishiBilanTopshiriq
         fields = [
             'id', 'user',
             'title', 'body', 'file1', 'file2', 'file3', 'file4'
+        ]
+
+class OzXohishiBilanTopshiriqPostSerializer(ModelSerializer):
+    class Meta:
+        model = OzXohishiBilanTopshiriq
+        fields = [
+           'user', 'title', 'body', 'file1', 'file2', 'file3', 'file4'
         ]
 
 

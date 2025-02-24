@@ -4,8 +4,8 @@ from users.choices import UserRoleChoice
 from topshiriq.choices import TopshiriqTuriChoice
 from topshiriq.models import Topshiriq, MajburiyTopshiriq, QoshimchaTopshiriq
 from topshiriq.models import OzSohasidaTopshiriq, OzXohishiBilanTopshiriq
-from topshiriq.serializers import MajburiyTopshiriqSerializer, QoshimchaTopshiriqSerializer
-from topshiriq.serializers import OzSohasidaTopshiriqSerializer, OzXohishiBilanTopshiriqSerializer
+from topshiriq.serializers import MajburiyTopshiriqGetSerializer, MajburiyTopshiriqPostSerializer, QoshimchaTopshiriqGetSerializer, QoshimchaTopshiriqPostSerializer
+from topshiriq.serializers import OzSohasidaTopshiriqGetSerializer, OzSohasidaTopshiriqPostSerializer, OzXohishiBilanTopshiriqGetSerializer, OzXohishiBilanTopshiriqPostSerializer
 from topshiriq.serializers import SuperAdminMajburiyTopshiriqSerializer, SuperAdminQoshimchaTopshiriqSerializer, SuperAdminOzSohasidaTopshiriqSerializer
 from topshiriq.serializers import SuperAdminMajburiyTopshiriqSerializer, SuperAdminQoshimchaTopshiriqSerializer,AdminQoshimchaTopshiriqSerializer
 
@@ -62,34 +62,51 @@ class AdminQoshimchaTopshiriqViewSet(ModelViewSet):
 
 class MajburiyTopshiriqViewSet(ModelViewSet):
     queryset = MajburiyTopshiriq.objects.all()
-    serializer_class = MajburiyTopshiriqSerializer
     http_method_names = ['get', 'patch']
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['topshiriq__active', 'baxolash', 'tur']
 
 
+    def get_serializer_class(self):
+        if self.action in ['list', 'retrieve']:  # GET uchun
+            return MajburiyTopshiriqGetSerializer
+        return MajburiyTopshiriqPostSerializer  # POST, PUT, PATCH uchun
+
+
+
 class QoshimchaTopshiriqViewSet(ModelViewSet):
     queryset = QoshimchaTopshiriq.objects.all()
-    serializer_class = QoshimchaTopshiriqSerializer
     http_method_names = ['get', 'patch']
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['baxolash']
 
+    def get_serializer_class(self):
+        if self.action in ['list', 'retrieve']:  # GET uchun
+            return QoshimchaTopshiriqGetSerializer
+        return QoshimchaTopshiriqPostSerializer  # POST, PUT, PATCH uchun
+
 
 class OzSohasidaTopshiriqViewSet(ModelViewSet):
     queryset = OzSohasidaTopshiriq.objects.all()
-    serializer_class = OzSohasidaTopshiriqSerializer
     http_method_names = ['get', 'post', 'patch', 'delete']
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['baxolash']
+
+    def get_serializer_class(self):
+        if self.action in ['list', 'retrieve']:  # GET uchun
+            return OzSohasidaTopshiriqGetSerializer
+        return OzSohasidaTopshiriqPostSerializer  # POST, PUT, PATCH uchun
 
 
 class OzXohishiBilanTopshiriqViewSet(ModelViewSet):
     queryset = OzXohishiBilanTopshiriq.objects.all()
-    serializer_class = OzXohishiBilanTopshiriqSerializer
     http_method_names = ['get', 'post', 'patch', 'delete']
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['baxolash']
 
+    def get_serializer_class(self):
+        if self.action in ['list', 'retrieve']:  # GET uchun
+            return OzXohishiBilanTopshiriqGetSerializer
+        return OzXohishiBilanTopshiriqPostSerializer  # POST, PUT, PATCH uchun
 
 
