@@ -33,7 +33,10 @@ class UserViewSet(ModelViewSet):
     http_method_names = ['get', 'post', 'patch']
     # filter_backends = [DjangoFilterBackend,]
     filter_backends = (filters.DjangoFilterBackend,)
-    filterset_fields = ['username', 'role', 'guruh']
+    filterset_fields = [
+        'username', 'role', 'guruh__kurs__yonalish__fakultet',
+        'guruh__kurs__yonalish', 'guruh__kurs', 'guruh',
+    ]
 
     def get_serializer_class(self):
         if self.action in ['list', 'retrieve']:  # GET uchun
