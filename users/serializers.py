@@ -7,28 +7,43 @@ class FakultetSerializer(ModelSerializer):
         model = Fakultet
         fields = ['id', 'name']
 
-class YonalishSerializer(ModelSerializer):
+class YonalishGetSerializer(ModelSerializer):
     fakultet = FakultetSerializer()
     class Meta:
         model = Yonalish
         fields = ['id', 'fakultet', 'name']
 
-class KursSerializer(ModelSerializer):
-    yonalish = YonalishSerializer()
+class YonalishPostSerializer(ModelSerializer):
+    class Meta:
+        model = Yonalish
+        fields = ['fakultet', 'name']
+
+class KursGetSerializer(ModelSerializer):
+    yonalish = YonalishGetSerializer()
     class Meta:
         model = Kurs
         fields = ['id', 'yonalish', 'name']
 
-class GuruhSerializer(ModelSerializer):
-    kurs = KursSerializer()
+class KursPostSerializer(ModelSerializer):
+    class Meta:
+        model = Kurs
+        fields = ['yonalish', 'name']
+
+class GuruhGetSerializer(ModelSerializer):
+    kurs = KursGetSerializer()
     class Meta:
         model = Guruh
         fields = ['id', 'kurs', 'name']
 
+class GuruhPostSerializer(ModelSerializer):
+    class Meta:
+        model = Guruh
+        fields = ['kurs', 'name']
+
 
 
 class UserGetSerializer(ModelSerializer):
-    guruh= GuruhSerializer(many=True, read_only=True)  # ✅ To‘liq ma'lumotni qo‘shish
+    guruh= GuruhGetSerializer(many=True, read_only=True)  # ✅ To‘liq ma'lumotni qo‘shish
 
     
     class Meta:

@@ -12,12 +12,8 @@ from users.views import bosh_sahifa
 
 schema_view = get_schema_view(
    openapi.Info(
-      title="Tyutor",
+      title="Tyutor API",
       default_version='v1.1',
-      description="Tyutor uchun yaratilgan API",
-      terms_of_service="https://kspi.uz",
-      contact=openapi.Contact(email="hatamovfazliddin5@gmail.com"),
-      license=openapi.License(name="KSPI License"),
    ),
    public=True,
    permission_classes=(permissions.AllowAny,),
