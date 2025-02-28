@@ -34,8 +34,7 @@ class UserViewSet(ModelViewSet):
     # filter_backends = [DjangoFilterBackend,]
     filter_backends = (filters.DjangoFilterBackend,)
     filterset_fields = [
-        'username', 'role', 'guruh__kurs__yonalish__fakultet',
-        'guruh__kurs__yonalish', 'guruh__kurs', 'guruh',
+        'username', 'role', 'fakultet'
     ]
 
     def get_serializer_class(self):
