@@ -44,6 +44,7 @@ class GuruhPostSerializer(ModelSerializer):
 
 class UserGetSerializer(ModelSerializer):
     guruh= GuruhGetSerializer(many=True, read_only=True)  # ✅ To‘liq ma'lumotni qo‘shish
+    fakultet = FakultetSerializer()
 
     
     class Meta:
