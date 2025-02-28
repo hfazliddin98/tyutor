@@ -53,4 +53,7 @@ class Users(AbstractUser):
     rasm = models.ImageField(upload_to='users', blank=True)
     parol = models.CharField(max_length=255, blank=True)
 
+    class Meta:
+        ordering = ['-date_joined']
+
 
