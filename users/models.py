@@ -48,6 +48,7 @@ class Guruh(AsosiyModel):
 class Users(AbstractUser):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, unique=True, editable=False)
     role = models.CharField(max_length=30, choices=UserRoleChoice.choices)
+    fakultet = models.ForeignKey(Fakultet, related_name="users", on_delete=models.CASCADE, blank=True, null=True)
     guruh = models.ManyToManyField(Guruh, related_name="guruh", blank=True)
     rasm = models.ImageField(upload_to='users', blank=True)
     parol = models.CharField(max_length=255, blank=True)

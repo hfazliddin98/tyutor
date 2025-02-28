@@ -48,7 +48,7 @@ class UserGetSerializer(ModelSerializer):
     
     class Meta:
         model = Users
-        fields = ['id', 'username', 'first_name', 'last_name', 'role', 'guruh', 'rasm', 'parol', 'is_active']
+        fields = ['id', 'username', 'first_name', 'last_name', 'role', 'fakultet', 'guruh', 'rasm', 'parol', 'is_active']
 
 
 
@@ -57,7 +57,7 @@ class UserPostSerializer(ModelSerializer):
 
     class Meta:
         model = Users
-        fields = ['id', 'username', 'first_name', 'last_name', 'role', 'guruh', 'password', 'is_active']
+        fields = ['id', 'username', 'first_name', 'last_name', 'role', 'fakultet', 'guruh', 'password', 'is_active']
         extra_kwargs = {'password': {'write_only': True}}  # ✅ Parol API javobida chiqmaydi
 
     def create(self, validated_data):
