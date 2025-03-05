@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
-from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
 from django.http import HttpResponse
 from rest_framework_simplejwt.tokens import AccessToken
@@ -31,8 +30,7 @@ def token_vaqt(request, token):
 class UserViewSet(ModelViewSet):
     queryset = Users.objects.filter(is_superuser=False)
     http_method_names = ['get', 'post', 'patch']
-    # filter_backends = [DjangoFilterBackend,]
-    filter_backends = (filters.DjangoFilterBackend,)
+    filter_backends = [DjangoFilterBackend,]
     filterset_fields = [
         'username', 'role', 'fakultet'
     ]

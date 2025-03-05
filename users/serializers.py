@@ -2,51 +2,57 @@ from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField
 from .models import Users, Fakultet, Yonalish, Kurs, Guruh
 
 
-class FakultetSerializer(ModelSerializer):
-    class Meta:
-        model = Fakultet
-        fields = ['id', 'name']
-
-class YonalishGetSerializer(ModelSerializer):
-    fakultet = FakultetSerializer()
-    class Meta:
-        model = Yonalish
-        fields = ['id', 'fakultet', 'name']
-
-class YonalishPostSerializer(ModelSerializer):
-    class Meta:
-        model = Yonalish
-        fields = ['fakultet', 'name']
-
-class KursGetSerializer(ModelSerializer):
-    yonalish = YonalishGetSerializer()
-    class Meta:
-        model = Kurs
-        fields = ['id', 'yonalish', 'name']
-
-class KursPostSerializer(ModelSerializer):
-    class Meta:
-        model = Kurs
-        fields = ['yonalish', 'name']
 
 class GuruhGetSerializer(ModelSerializer):
-    kurs = KursGetSerializer()
     class Meta:
         model = Guruh
-        fields = ['id', 'kurs', 'name']
+        fields = ['id', 'name']
 
 class GuruhPostSerializer(ModelSerializer):
     class Meta:
         model = Guruh
         fields = ['kurs', 'name']
 
+class KursGetSerializer(ModelSerializer):
+    guruh = GuruhGetSerializer(many=True, read_only=True)
+    class Meta:
+        model = Kurs
+        fields = ['id', 'name', 'guruh']
+
+class KursPostSerializer(ModelSerializer):
+    class Meta:
+        model = Kurs
+        fields = ['yonalish', 'name']
+
+class YonalishGetSerializer(ModelSerializer):
+    kurs = KursGetSerializer(many=True, read_only=True)
+    class Meta:
+        model = Yonalish
+        fields = ['id', 'name',  'kurs',]
+
+class YonalishPostSerializer(ModelSerializer):
+    class Meta:
+        model = Yonalish
+        fields = ['fakultet', 'name']
+
+class FakultetSerializer(ModelSerializer):
+    yonalish = YonalishGetSerializer(many=True, read_only=True)
+    class Meta:
+        model = Fakultet
+        fields = ['id', 'name', 'yonalish',]
+
+
+class FakultetGetSerializer(ModelSerializer):
+    class Meta:
+        model = Fakultet
+        fields = ['id', 'name']
+
 
 
 class UserGetSerializer(ModelSerializer):
     guruh= GuruhGetSerializer(many=True, read_only=True)  # ✅ To‘liq ma'lumotni qo‘shish
-    fakultet = FakultetSerializer()
+    fakultet = FakultetGetSerializer()
 
-    
     class Meta:
         model = Users
         fields = ['id', 'username', 'first_name', 'last_name', 'role', 'fakultet', 'guruh', 'rasm', 'parol', 'is_active']
