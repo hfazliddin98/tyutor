@@ -6,46 +6,46 @@ from .models import Users, Fakultet, Yonalish, Kurs, Guruh
 class GuruhGetSerializer(ModelSerializer):
     class Meta:
         model = Guruh
-        fields = ['id', 'name']
+        fields = ['id', 'name', 'is_active']
 
 class GuruhPostSerializer(ModelSerializer):
     class Meta:
         model = Guruh
-        fields = ['kurs', 'name']
+        fields = ['kurs', 'name', 'is_active']
 
 class KursGetSerializer(ModelSerializer):
-    guruh = GuruhGetSerializer(many=True, read_only=True)
+    guruhlar = GuruhGetSerializer(many=True, read_only=True)
     class Meta:
         model = Kurs
-        fields = ['id', 'name', 'guruh']
+        fields = ['id', 'name', 'is_active', 'guruhlar']
 
 class KursPostSerializer(ModelSerializer):
     class Meta:
         model = Kurs
-        fields = ['yonalish', 'name']
+        fields = ['yonalish', 'name', 'is_active']
 
 class YonalishGetSerializer(ModelSerializer):
-    kurs = KursGetSerializer(many=True, read_only=True)
+    kurslar = KursGetSerializer(many=True, read_only=True)
     class Meta:
         model = Yonalish
-        fields = ['id', 'name',  'kurs',]
+        fields = ['id', 'name', 'is_active',  'kurslar',]
 
 class YonalishPostSerializer(ModelSerializer):
     class Meta:
         model = Yonalish
-        fields = ['fakultet', 'name']
+        fields = ['fakultet', 'name', 'is_active']
 
 class FakultetSerializer(ModelSerializer):
-    yonalish = YonalishGetSerializer(many=True, read_only=True)
+    yonalishlar = YonalishGetSerializer(many=True, read_only=True)
     class Meta:
         model = Fakultet
-        fields = ['id', 'name', 'yonalish',]
+        fields = ['id', 'name', 'is_active', 'yonalishlar',]
 
 
 class FakultetGetSerializer(ModelSerializer):
     class Meta:
         model = Fakultet
-        fields = ['id', 'name']
+        fields = ['id', 'name', 'is_active']
 
 
 

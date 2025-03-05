@@ -44,13 +44,17 @@ class UserViewSet(ModelViewSet):
 class FakultetViewSet(ModelViewSet):
     queryset = Fakultet.objects.all()
     serializer_class = FakultetSerializer
-    http_method_names = ['get', 'post', 'patch', 'delete']
+    http_method_names = ['get', 'post', 'patch']
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['name']
+    filterset_fields = [
+        'yonalishlar__id', 'yonalishlar__name',
+        'yonalishlar__kurslar__id', 'yonalishlar__kurslar__name',
+        'yonalishlar__kurslar__guruhlar__id', 'yonalishlar__kurslar__guruhlar__name',
+        ]
 
 class YonalishViewSet(ModelViewSet):
     queryset = Yonalish.objects.all()
-    http_method_names = ['get', 'post', 'patch', 'delete']
+    http_method_names = ['get', 'post', 'patch']
 
     def get_serializer_class(self):
         if self.action in ['list', 'retrieve']:  # GET uchun
@@ -59,7 +63,7 @@ class YonalishViewSet(ModelViewSet):
 
 class KursViewSet(ModelViewSet):
     queryset = Kurs.objects.all()
-    http_method_names = ['get', 'post', 'patch', 'delete']
+    http_method_names = ['get', 'post', 'patch']
 
     def get_serializer_class(self):
         if self.action in ['list', 'retrieve']:  # GET uchun
@@ -68,7 +72,7 @@ class KursViewSet(ModelViewSet):
 
 class GuruhViewSet(ModelViewSet):
     queryset = Guruh.objects.all()
-    http_method_names = ['get', 'post', 'patch', 'delete']
+    http_method_names = ['get', 'post', 'patch']
 
     def get_serializer_class(self):
         if self.action in ['list', 'retrieve']:  # GET uchun

@@ -16,7 +16,7 @@ class SuperAdminMajburiyTopshiriqSerializer(ModelSerializer):
             'id', 'topshiriq_users', 'topshiriq_turi',
             'majburiy_topshiriq_turi', 'topshiriq_soni', 'max_baxo',
             'title', 'body', 'file1', 'file2', 'file3', 'file4', 
-            'boshlanish_vaqti', 'tugash_vaqti'
+            'boshlanish_vaqti', 'tugash_vaqti', 'is_active'
         ]
         read_only_fields = ['topshiriq_turi']
         
@@ -28,7 +28,7 @@ class SuperAdminQoshimchaTopshiriqSerializer(ModelSerializer):
         fields = [
             'id', 'topshiriq_users', 'topshiriq_turi', 'max_baxo',
             'title', 'body', 'file1', 'file2', 'file3', 'file4', 
-            'boshlanish_vaqti', 'tugash_vaqti'
+            'boshlanish_vaqti', 'tugash_vaqti', 'is_active'
         ]
         read_only_fields = ['topshiriq_turi']
 
@@ -39,7 +39,7 @@ class SuperAdminOzSohasidaTopshiriqSerializer(ModelSerializer):
         fields = [
             'id', 'topshiriq_users', 'topshiriq_turi', 'max_baxo',
             'title', 'body', 'file1', 'file2', 'file3', 'file4', 
-            'boshlanish_vaqti', 'tugash_vaqti'
+            'boshlanish_vaqti', 'tugash_vaqti', 'is_active'
         ]
         read_only_fields = ['topshiriq_turi']
 
@@ -53,7 +53,7 @@ class AdminQoshimchaTopshiriqSerializer(ModelSerializer):
         fields = [
             'id', 'topshiriq_users', 'topshiriq_turi', 'max_baxo',
             'title', 'body', 'file1', 'file2', 'file3', 'file4', 
-            'boshlanish_vaqti', 'tugash_vaqti'
+            'boshlanish_vaqti', 'tugash_vaqti', 'is_active'
         ]
         read_only_fields = ['topshiriq_turi']
         
@@ -64,7 +64,7 @@ class TopshiriqUserSerializer(ModelSerializer):
 
     class Meta:
         model = Users
-        fields = ['first_name', 'last_name', 'role', 'fakultet', 'rasm']
+        fields = ['first_name', 'last_name', 'role', 'fakultet', 'rasm', 'is_active']
 
 class TopshiriqSerializer(ModelSerializer):
     class Meta:
@@ -72,7 +72,7 @@ class TopshiriqSerializer(ModelSerializer):
         fields = [
             'id', 'max_baxo',
             'title', 'body', 'file1', 'file2', 'file3', 'file4', 
-            'boshlanish_vaqti', 'tugash_vaqti'
+            'boshlanish_vaqti', 'tugash_vaqti', 'is_active'
         ]
 
 
@@ -83,14 +83,14 @@ class MajburiyTopshiriqGetSerializer(ModelSerializer):
         model = MajburiyTopshiriq
         fields = [
             'id', 'user', 'topshiriq', 'tur',
-            'title', 'body', 'file1', 'file2', 'file3', 'file4'
+            'title', 'body', 'file1', 'file2', 'file3', 'file4', 'is_active'
         ]
 
 class MajburiyTopshiriqPostSerializer(ModelSerializer):
     class Meta:
         model = MajburiyTopshiriq
         fields = [
-            'title', 'body', 'file1', 'file2', 'file3', 'file4'
+            'title', 'body', 'file1', 'file2', 'file3', 'file4', 'is_active'
         ]
 
 class QoshimchaTopshiriqGetSerializer(ModelSerializer):
@@ -100,14 +100,14 @@ class QoshimchaTopshiriqGetSerializer(ModelSerializer):
         model = QoshimchaTopshiriq
         fields = [
             'id', 'user', 'topshiriq',
-            'title', 'body', 'file1', 'file2', 'file3', 'file4'
+            'title', 'body', 'file1', 'file2', 'file3', 'file4', 'is_active'
         ]
 
 class QoshimchaTopshiriqPostSerializer(ModelSerializer):
     class Meta:
         model = QoshimchaTopshiriq
         fields = [
-            'title', 'body', 'file1', 'file2', 'file3', 'file4'
+            'title', 'body', 'file1', 'file2', 'file3', 'file4', 'is_active'
         ]
 
 class OzSohasidaTopshiriqGetSerializer(ModelSerializer):
@@ -117,7 +117,7 @@ class OzSohasidaTopshiriqGetSerializer(ModelSerializer):
         model = OzSohasidaTopshiriq
         fields = [
             'id', 'user', 'topshiriq',
-            'title', 'body', 'file1', 'file2', 'file3', 'file4'
+            'title', 'body', 'file1', 'file2', 'file3', 'file4', 'is_active'
         ]
 
 class OzSohasidaTopshiriqPostSerializer(ModelSerializer):
@@ -125,7 +125,7 @@ class OzSohasidaTopshiriqPostSerializer(ModelSerializer):
     class Meta:
         model = OzSohasidaTopshiriq
         fields = [
-            'title', 'body', 'file1', 'file2', 'file3', 'file4'
+            'title', 'body', 'file1', 'file2', 'file3', 'file4', 'is_active'
         ]
 
 class OzXohishiBilanTopshiriqGetSerializer(ModelSerializer):
@@ -134,14 +134,14 @@ class OzXohishiBilanTopshiriqGetSerializer(ModelSerializer):
         model = OzXohishiBilanTopshiriq
         fields = [
             'id', 'user',
-            'title', 'body', 'file1', 'file2', 'file3', 'file4'
+            'title', 'body', 'file1', 'file2', 'file3', 'file4', 'is_active'
         ]
 
 class OzXohishiBilanTopshiriqPostSerializer(ModelSerializer):
     class Meta:
         model = OzXohishiBilanTopshiriq
         fields = [
-           'user', 'title', 'body', 'file1', 'file2', 'file3', 'file4'
+           'user', 'title', 'body', 'file1', 'file2', 'file3', 'file4', 'is_active'
         ]
 
 

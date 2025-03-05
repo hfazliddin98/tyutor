@@ -8,6 +8,7 @@ class AsosiyModel(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, unique=True, editable=False)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
+    is_active = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['-created_at']
@@ -21,7 +22,7 @@ class Fakultet(AsosiyModel):
         return full_name
 
 class Yonalish(AsosiyModel):
-    fakultet = models.ForeignKey(Fakultet, related_name="fakultet", on_delete=models.CASCADE)
+    fakultet = models.ForeignKey(Fakultet, related_name="yonalishlar", on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
 
     def __str__(self):
@@ -29,7 +30,7 @@ class Yonalish(AsosiyModel):
         return full_name
 
 class Kurs(AsosiyModel):
-    yonalish = models.ForeignKey(Yonalish, related_name="yonalish", on_delete=models.CASCADE)
+    yonalish = models.ForeignKey(Yonalish, related_name="kurslar", on_delete=models.CASCADE)
     name = models.CharField(max_length=30, choices=KursRoleChoice.choices)
 
     def __str__(self):
@@ -37,7 +38,7 @@ class Kurs(AsosiyModel):
         return full_name
     
 class Guruh(AsosiyModel):
-    kurs = models.ForeignKey(Kurs, related_name="kurs", on_delete=models.CASCADE)
+    kurs = models.ForeignKey(Kurs, related_name="guruhlar", on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
 
     def __str__(self):
