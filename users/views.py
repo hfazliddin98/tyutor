@@ -47,6 +47,7 @@ class FakultetViewSet(ModelViewSet):
     http_method_names = ['get', 'post', 'patch']
     filter_backends = [DjangoFilterBackend]
     filterset_fields = [
+        'id', 'name',
         'yonalishlar__id', 'yonalishlar__name',
         'yonalishlar__kurslar__id', 'yonalishlar__kurslar__name',
         'yonalishlar__kurslar__guruhlar__id', 'yonalishlar__kurslar__guruhlar__name',

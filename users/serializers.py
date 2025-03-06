@@ -42,6 +42,38 @@ class FakultetSerializer(ModelSerializer):
         fields = ['id', 'name', 'is_active', 'yonalishlar',]
 
 
+
+#  user maluotlari uchun
+
+
+
+
+
+class FakultetSerializer(ModelSerializer):
+    class Meta:
+        model = Fakultet
+        fields = ['id', 'name', 'is_active',]
+
+
+class YonalishSerializer(ModelSerializer):
+    fakultet = FakultetSerializer()
+    class Meta:
+        model = Yonalish
+        fields = ['id', 'name', 'is_active', 'fakultet']
+
+class KursSerializer(ModelSerializer):
+    yonalish = YonalishSerializer()
+    class Meta:
+        model = Kurs
+        fields = ['id', 'name', 'is_active', 'yonalish']
+
+class GuruhSerializer(ModelSerializer):
+    kurs = KursSerializer()
+    class Meta:
+        model = Guruh
+        fields = ['id', 'name', 'is_active', 'kurs']
+
+
 class FakultetGetSerializer(ModelSerializer):
     class Meta:
         model = Fakultet
@@ -50,7 +82,7 @@ class FakultetGetSerializer(ModelSerializer):
 
 
 class UserGetSerializer(ModelSerializer):
-    guruh= GuruhGetSerializer(many=True, read_only=True)  # ✅ To‘liq ma'lumotni qo‘shish
+    guruh= GuruhSerializer(many=True, read_only=True)  # ✅ To‘liq ma'lumotni qo‘shish
     fakultet = FakultetGetSerializer()
 
     class Meta:
