@@ -48,9 +48,9 @@ class FakultetViewSet(ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = [
         'id', 'name',
-        'yonalishlar__id', 'yonalishlar__name',
-        'yonalishlar__kurslar__id', 'yonalishlar__kurslar__name',
-        'yonalishlar__kurslar__guruhlar__id', 'yonalishlar__kurslar__guruhlar__name',
+        'yonalishlar__id',
+        'yonalishlar__kurslar__id',
+        'yonalishlar__kurslar__guruhlar__id',
         ]
 
 class YonalishViewSet(ModelViewSet):
