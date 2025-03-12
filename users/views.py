@@ -7,7 +7,7 @@ from datetime import datetime, timezone, timedelta
 from rest_framework.viewsets import ModelViewSet
 from .models import Users,Fakultet, Yonalish, Kurs, Guruh
 from .serializers import UserGetSerializer, UserPostSerializer
-from .serializers import FakultetSerializer, YonalishGetSerializer, YonalishPostSerializer
+from .serializers import FakultetGetSerializer, FakultetPostSerializer, YonalishGetSerializer, YonalishPostSerializer
 from .serializers import KursGetSerializer, KursPostSerializer, GuruhGetSerializer, GuruhPostSerializer
 
 
@@ -43,15 +43,19 @@ class UserViewSet(ModelViewSet):
 
 class FakultetViewSet(ModelViewSet):
     queryset = Fakultet.objects.all()
-    serializer_class = FakultetSerializer
     http_method_names = ['get', 'post', 'patch']
     filter_backends = [DjangoFilterBackend]
     filterset_fields = [
-        'id', 'name',
+        'id',
         'yonalishlar__id',
         'yonalishlar__kurslar__id',
         'yonalishlar__kurslar__guruhlar__id',
         ]
+    def get_serializer_class(self):
+        if self.action in ['list', 'retrieve']:  # GET uchun
+            return FakultetGetSerializer
+        return FakultetPostSerializer  # POST, PUT, PATCH uchun
+
 
 class YonalishViewSet(ModelViewSet):
     queryset = Yonalish.objects.all()
