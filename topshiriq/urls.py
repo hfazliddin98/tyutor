@@ -3,7 +3,7 @@ from rest_framework.routers import DefaultRouter
 from topshiriq.views import MajburiyTopshiriqViewSet, QoshimchaTopshiriqViewSet
 from topshiriq.views import OzSohasidaTopshiriqViewSet, OzXohishiBilanTopshiriqViewSet
 from topshiriq.views import SuperAdminMajburiyTopshiriqViewSet, SuperAdminQoshimchaTopshiriqViewSet, SuperAdminOzSohasidaTopshiriqViewSet
-from topshiriq.views import AdminQoshimchaTopshiriqViewSet
+from topshiriq.views import AdminQoshimchaTopshiriqViewSet, TalabalarViewSet
 
 
 router = DefaultRouter()
@@ -19,6 +19,7 @@ router.register(r'majburiy', MajburiyTopshiriqViewSet, basename='majburiy')
 router.register(r'qoshimcha', QoshimchaTopshiriqViewSet, basename='qoshimcha')
 router.register(r'oz_sohasida', OzSohasidaTopshiriqViewSet, basename='ozsohasida')
 router.register(r'oz_xohishi_bilan', OzXohishiBilanTopshiriqViewSet, basename='oz_xohishi_bilan')
+router.register(r'talabalar', TalabalarViewSet, basename='talabalar')
 
 
 urlpatterns = []

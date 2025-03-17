@@ -3,7 +3,7 @@ from users.models import Users
 from users.middleware import get_current_request
 from users.choices import UserRoleChoice
 from users.serializers import FakultetSerializer
-from topshiriq.models import Topshiriq, MajburiyTopshiriq, QoshimchaTopshiriq, OzSohasidaTopshiriq, OzXohishiBilanTopshiriq
+from topshiriq.models import Topshiriq, MajburiyTopshiriq, QoshimchaTopshiriq, OzSohasidaTopshiriq, OzXohishiBilanTopshiriq, Talabalar
 
 
 # Superadmin
@@ -155,6 +155,25 @@ class OzXohishiBilanTopshiriqPostSerializer(ModelSerializer):
         model = OzXohishiBilanTopshiriq
         fields = [
            'user', 'title', 'body', 'file1', 'file2', 'file3', 'file4', 'is_active'
+        ]
+
+class TalabalarGetSerializer(ModelSerializer):
+    tyutor = TopshiriqUserSerializer()
+    class Meta:
+        model = Talabalar
+        fields = [
+           'id','fakultet', 'yonalish', 'kurs', 'guruh', 'tyutor',
+            'familya', 'ism', 'jins', 'tolov_status', 
+            'ijtimoiy_ximoya', 'ijtimoiy_daraja', 'iqdidorli_talaba','is_active'
+        ]
+
+class TalabalarPostSerializer(ModelSerializer):
+    class Meta:
+        model = Talabalar
+        fields = [
+           'fakultet', 'yonalish', 'kurs', 'guruh', 'tyutor',
+            'familya', 'ism', 'jins', 'tolov_status', 
+            'ijtimoiy_ximoya', 'ijtimoiy_daraja', 'iqdidorli_talaba','is_active'
         ]
 
 
