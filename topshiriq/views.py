@@ -18,7 +18,7 @@ class SuperAdminMajburiyTopshiriqViewSet(ModelViewSet):
     serializer_class = SuperAdminMajburiyTopshiriqSerializer
     http_method_names = ['get', 'post', 'patch', 'delete']
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = []
+    filterset_fields = ['majburiy_topshiriq_turi', 'boshlanish_vaqti', 'tugash_vaqti']
 
     def perform_create(self, serializer):
         serializer.save(topshiriq_turi=TopshiriqTuriChoice.MAJBURIY)
@@ -29,7 +29,7 @@ class SuperAdminQoshimchaTopshiriqViewSet(ModelViewSet):
     serializer_class = SuperAdminQoshimchaTopshiriqSerializer
     http_method_names = ['get', 'post', 'patch', 'delete']
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = []
+    filterset_fields = ['boshlanish_vaqti', 'tugash_vaqti']
 
     def perform_create(self, serializer):
         serializer.save(topshiriq_turi=TopshiriqTuriChoice.QOSHIMCHA)
@@ -39,7 +39,7 @@ class SuperAdminOzSohasidaTopshiriqViewSet(ModelViewSet):
     serializer_class = SuperAdminOzSohasidaTopshiriqSerializer
     http_method_names = ['get', 'post', 'patch', 'delete']
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = []
+    filterset_fields = ['boshlanish_vaqti', 'tugash_vaqti']
 
     def perform_create(self, serializer):
         serializer.save(topshiriq_turi=TopshiriqTuriChoice.OZ_SOHASIDA)
@@ -52,7 +52,7 @@ class AdminQoshimchaTopshiriqViewSet(ModelViewSet):
     serializer_class = AdminQoshimchaTopshiriqSerializer
     http_method_names = ['get', 'post', 'patch', 'delete']
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = []
+    filterset_fields = ['boshlanish_vaqti', 'tugash_vaqti']
 
     def perform_create(self, serializer):
         serializer.save(topshiriq_turi=TopshiriqTuriChoice.QOSHIMCHA)
