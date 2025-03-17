@@ -19,3 +19,8 @@ class MajburiyTopshiriqTuriChoice(models.TextChoices):
     OILAGA_XAT = ("oilaga_xat", "oilaga_xat")
     TEST = ("test", "test")
 
+class TalabaChoice(models.TextChoices):
+    OGIL= ("o`g`il", "o`g`il")
+    QIZ = ("qiz", "qiz")
+
+

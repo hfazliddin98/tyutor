@@ -1,5 +1,5 @@
 from django.db import models
-from topshiriq.choices import TopshiriqTuriChoice, MajburiyTopshiriqTuriChoice
+from topshiriq.choices import TopshiriqTuriChoice, MajburiyTopshiriqTuriChoice, TalabaChoice
 from users.models import AsosiyModel, Users
 
 
@@ -92,4 +92,19 @@ class OzXohishiBilanTopshiriq(AsosiyModel):
     def __str__(self):
         return self.title
     
+class Talabalar(AsosiyModel):
+    fakultet = models.CharField(max_length=255)
+    yonalish = models.CharField(max_length=255)
+    kurs = models.CharField(max_length=255)
+    guruh = models.CharField(max_length=255)
+    tyutor = models.ForeignKey(Users, on_delete=models.CASCADE)
+    familya = models.CharField(max_length=255)
+    ism = models.CharField(max_length=255)
+    jins = models.CharField(max_length=255, choices=TalabaChoice.choices, blank=True)
+    tolov_status = models.CharField(max_length=255)
+    ijtimoiy_ximoya = models.CharField(max_length=255,blank=True)
+    ijtimoiy_daraja = models.CharField(max_length=255,blank=True)
+    iqdidorli_talaba = models.CharField(max_length=255,blank=True)
 
+    def __str__(self):
+        return self.familya

@@ -15,18 +15,17 @@ from topshiriq.serializers import SuperAdminMajburiyTopshiriqGetSerializer, Supe
 
 class SuperAdminMajburiyTopshiriqViewSet(ModelViewSet):
     queryset = Topshiriq.objects.filter(admin_user__role=UserRoleChoice.SUPERADMIN).filter(topshiriq_turi=TopshiriqTuriChoice.MAJBURIY)
-    # serializer_class = SuperAdminMajburiyTopshiriqSerializer
     http_method_names = ['get', 'post', 'patch', 'delete']
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['majburiy_topshiriq_turi', 'boshlanish_vaqti', 'tugash_vaqti']
+    
+    def perform_create(self, serializer):
+        serializer.save(topshiriq_turi=TopshiriqTuriChoice.MAJBURIY)
 
     def get_serializer_class(self):
         if self.action in ['list', 'retrieve']:  # GET uchun
             return SuperAdminMajburiyTopshiriqGetSerializer
         return SuperAdminMajburiyTopshiriqPostSerializer  # POST, PUT, PATCH uchun
-    
-    def perform_create(self, serializer):
-        serializer.save(topshiriq_turi=TopshiriqTuriChoice.MAJBURIY)
 
 
 class SuperAdminQoshimchaTopshiriqViewSet(ModelViewSet):
@@ -38,6 +37,11 @@ class SuperAdminQoshimchaTopshiriqViewSet(ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(topshiriq_turi=TopshiriqTuriChoice.QOSHIMCHA)
+
+    def get_serializer_class(self):
+        if self.action in ['list', 'retrieve']:  # GET uchun
+            return SuperAdminMajburiyTopshiriqGetSerializer
+        return SuperAdminMajburiyTopshiriqPostSerializer  # POST, PUT, PATCH uchun
 
 class SuperAdminOzSohasidaTopshiriqViewSet(ModelViewSet):
     queryset = Topshiriq.objects.filter(admin_user__role=UserRoleChoice.SUPERADMIN).filter(topshiriq_turi=TopshiriqTuriChoice.OZ_SOHASIDA)
