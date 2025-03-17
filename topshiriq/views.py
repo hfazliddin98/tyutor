@@ -6,8 +6,8 @@ from topshiriq.models import Topshiriq, MajburiyTopshiriq, QoshimchaTopshiriq
 from topshiriq.models import OzSohasidaTopshiriq, OzXohishiBilanTopshiriq
 from topshiriq.serializers import MajburiyTopshiriqGetSerializer, MajburiyTopshiriqPostSerializer, QoshimchaTopshiriqGetSerializer, QoshimchaTopshiriqPostSerializer
 from topshiriq.serializers import OzSohasidaTopshiriqGetSerializer, OzSohasidaTopshiriqPostSerializer, OzXohishiBilanTopshiriqGetSerializer, OzXohishiBilanTopshiriqPostSerializer
-from topshiriq.serializers import SuperAdminMajburiyTopshiriqSerializer, SuperAdminQoshimchaTopshiriqSerializer, SuperAdminOzSohasidaTopshiriqSerializer
-from topshiriq.serializers import SuperAdminMajburiyTopshiriqSerializer, SuperAdminQoshimchaTopshiriqSerializer,AdminQoshimchaTopshiriqSerializer
+from topshiriq.serializers import SuperAdminMajburiyTopshiriqPostSerializer, SuperAdminQoshimchaTopshiriqSerializer, SuperAdminOzSohasidaTopshiriqSerializer
+from topshiriq.serializers import SuperAdminMajburiyTopshiriqGetSerializer, SuperAdminQoshimchaTopshiriqSerializer,AdminQoshimchaTopshiriqSerializer
 
 
 
@@ -15,11 +15,16 @@ from topshiriq.serializers import SuperAdminMajburiyTopshiriqSerializer, SuperAd
 
 class SuperAdminMajburiyTopshiriqViewSet(ModelViewSet):
     queryset = Topshiriq.objects.filter(admin_user__role=UserRoleChoice.SUPERADMIN).filter(topshiriq_turi=TopshiriqTuriChoice.MAJBURIY)
-    serializer_class = SuperAdminMajburiyTopshiriqSerializer
+    # serializer_class = SuperAdminMajburiyTopshiriqSerializer
     http_method_names = ['get', 'post', 'patch', 'delete']
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['majburiy_topshiriq_turi', 'boshlanish_vaqti', 'tugash_vaqti']
 
+    def get_serializer_class(self):
+        if self.action in ['list', 'retrieve']:  # GET uchun
+            return SuperAdminMajburiyTopshiriqGetSerializer
+        return SuperAdminMajburiyTopshiriqPostSerializer  # POST, PUT, PATCH uchun
+    
     def perform_create(self, serializer):
         serializer.save(topshiriq_turi=TopshiriqTuriChoice.MAJBURIY)
 

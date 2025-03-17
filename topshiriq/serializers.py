@@ -8,17 +8,30 @@ from topshiriq.models import Topshiriq, MajburiyTopshiriq, QoshimchaTopshiriq, O
 
 # Superadmin
 
-class SuperAdminMajburiyTopshiriqSerializer(ModelSerializer):
+class SuperAdminMajburiyTopshiriqPostSerializer(ModelSerializer):
     topshiriq_users = PrimaryKeyRelatedField(queryset=Users.objects.all(), many=True)  # many=True kerak!
     class Meta:
         model = Topshiriq
         fields = [
-            'id', 'topshiriq_users', 'topshiriq_turi',
+            'topshiriq_users',
             'majburiy_topshiriq_turi', 'topshiriq_soni', 'max_baxo',
             'title', 'body', 'file1', 'file2', 'file3', 'file4', 
             'boshlanish_vaqti', 'tugash_vaqti', 'is_active'
         ]
         read_only_fields = ['topshiriq_turi']
+        
+
+class SuperAdminMajburiyTopshiriqGetSerializer(ModelSerializer):
+    topshiriq_users = PrimaryKeyRelatedField(queryset=Users.objects.all(), many=True)  # many=True kerak!
+    class Meta:
+        model = Topshiriq
+        fields = [
+            'id', 'topshiriq_users',
+            'majburiy_topshiriq_turi', 'topshiriq_soni', 'max_baxo',
+            'title', 'body', 'file1', 'file2', 'file3', 'file4', 
+            'boshlanish_vaqti', 'tugash_vaqti', 'is_active'
+        ]
+        
         
 
 class SuperAdminQoshimchaTopshiriqSerializer(ModelSerializer):
