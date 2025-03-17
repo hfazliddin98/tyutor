@@ -18,6 +18,7 @@ class SuperAdminMajburiyTopshiriqViewSet(ModelViewSet):
     http_method_names = ['get', 'post', 'patch', 'delete']
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['majburiy_topshiriq_turi', 'boshlanish_vaqti', 'tugash_vaqti']
+    ordering_fields = ['boshlanish_vaqti', 'tugash_vaqti']
     
     def perform_create(self, serializer):
         serializer.save(topshiriq_turi=TopshiriqTuriChoice.MAJBURIY)
