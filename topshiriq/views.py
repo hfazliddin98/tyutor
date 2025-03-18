@@ -16,10 +16,15 @@ from topshiriq.serializers import TalabalarGetSerializer, TalabalarPostSerialize
 class SuperAdminMajburiyTopshiriqViewSet(ModelViewSet):
     queryset = Topshiriq.objects.filter(admin_user__role=UserRoleChoice.SUPERADMIN).filter(topshiriq_turi=TopshiriqTuriChoice.MAJBURIY)
     http_method_names = ['get', 'post', 'patch', 'delete']
-    # filter_backends = [DjangoFilterBackend]
-    filter_backends = [OrderingFilter]
-    # filterset_fields = ['majburiy_topshiriq_turi', 'boshlanish_vaqti', 'tugash_vaqti']
-    ordering_fields = ['boshlanish_vaqti', 'tugash_vaqti']
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+    filterset_fields = {
+        'boshlanish_vaqti': ['gte', 'lte'],  # Oraliqda saralash uchun
+        'tugash_vaqti': ['gte', 'lte'],
+    }
+    
+    # Saralash mumkin bo‘lgan maydonlar
+    ordering_fields = ['boshlanish_vaqti', 'tugash_vaqti', 'nomi']
+    ordering = ['boshlanish_vaqti'] 
     
     def perform_create(self, serializer):
         serializer.save(topshiriq_turi=TopshiriqTuriChoice.MAJBURIY)
