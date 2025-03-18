@@ -1,5 +1,5 @@
 from rest_framework.viewsets import ModelViewSet
-from django_filters.rest_framework import DjangoFilterBackend
+from django_filters.rest_framework import DjangoFilterBackend, OrderingFilter
 from users.choices import UserRoleChoice
 from topshiriq.choices import TopshiriqTuriChoice
 from topshiriq.models import Topshiriq, MajburiyTopshiriq, QoshimchaTopshiriq
@@ -16,8 +16,9 @@ from topshiriq.serializers import TalabalarGetSerializer, TalabalarPostSerialize
 class SuperAdminMajburiyTopshiriqViewSet(ModelViewSet):
     queryset = Topshiriq.objects.filter(admin_user__role=UserRoleChoice.SUPERADMIN).filter(topshiriq_turi=TopshiriqTuriChoice.MAJBURIY)
     http_method_names = ['get', 'post', 'patch', 'delete']
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['majburiy_topshiriq_turi', 'boshlanish_vaqti', 'tugash_vaqti']
+    # filter_backends = [DjangoFilterBackend]
+    filter_backends = [OrderingFilter]
+    # filterset_fields = ['majburiy_topshiriq_turi', 'boshlanish_vaqti', 'tugash_vaqti']
     ordering_fields = ['boshlanish_vaqti', 'tugash_vaqti']
     
     def perform_create(self, serializer):
