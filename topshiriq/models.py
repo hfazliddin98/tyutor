@@ -1,5 +1,5 @@
 from django.db import models
-from topshiriq.choices import TopshiriqTuriChoice, MajburiyTopshiriqTuriChoice, TalabaChoice
+from topshiriq.choices import TopshiriqTuriChoice, MajburiyTopshiriqTuriChoice, TalabaChoice, TolovChoice
 from users.models import AsosiyModel, Users
 
 
@@ -101,7 +101,7 @@ class Talabalar(AsosiyModel):
     familya = models.CharField(max_length=255)
     ism = models.CharField(max_length=255)
     jins = models.CharField(max_length=255, choices=TalabaChoice.choices, blank=True)
-    tolov_status = models.CharField(max_length=255)
+    tolov_status = models.CharField(max_length=255, choices=TolovChoice.choices, blank=True)
     ijtimoiy_ximoya = models.CharField(max_length=255,blank=True)
     ijtimoiy_daraja = models.CharField(max_length=255,blank=True)
     iqdidorli_talaba = models.CharField(max_length=255,blank=True)

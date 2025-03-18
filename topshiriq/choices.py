@@ -14,6 +14,7 @@ class MajburiyTopshiriqTuriChoice(models.TextChoices):
     TUTORLIK_SOATI = ("tutorlik_soati", "tutorlik_soati")
     DAVRA_SUHBATI = ("davra_suhbati", "davra_suhbati")
     TADBIR = ("tadbir", "tadbir")
+    TOGARAK = ("togarak", "togarak")
     TTJDA_TADBIR = ("ttjda_tadbir", "ttjda_tadbir")
     IQDIDORLI_TALABAM = ("iqtidorli_talabam", "iqtidorli_talabam")
     OILAGA_XAT = ("oilaga_xat", "oilaga_xat")
@@ -22,5 +23,9 @@ class MajburiyTopshiriqTuriChoice(models.TextChoices):
 class TalabaChoice(models.TextChoices):
     OGIL= ("o`g`il", "o`g`il")
     QIZ = ("qiz", "qiz")
+
+class TolovChoice(models.TextChoices):
+    GRAND= ("grand", "grand")
+    KONTRAKT = ("kontrakt", "kontrakt")
 
 

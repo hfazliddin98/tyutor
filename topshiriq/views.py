@@ -139,7 +139,10 @@ class TalabalarViewSet(ModelViewSet):
     queryset = Talabalar.objects.all()
     http_method_names = ['get', 'post', 'patch', 'delete']
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = []
+    filterset_fields = [
+        'fakultet', 'yonalish',
+        'kurs', 'guruh', 'tyutor'
+        ]
 
     def get_serializer_class(self):
         if self.action in ['list', 'retrieve']:  # GET uchun
