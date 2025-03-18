@@ -1,5 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
 from users.choices import UserRoleChoice
 from topshiriq.choices import TopshiriqTuriChoice
 from topshiriq.models import Topshiriq, MajburiyTopshiriq, QoshimchaTopshiriq
@@ -17,11 +18,20 @@ class SuperAdminMajburiyTopshiriqViewSet(ModelViewSet):
     queryset = Topshiriq.objects.filter(admin_user__role=UserRoleChoice.SUPERADMIN).filter(topshiriq_turi=TopshiriqTuriChoice.MAJBURIY)
     http_method_names = ['get', 'post', 'patch', 'delete']
     filter_backends = [DjangoFilterBackend]
+
+    # Filtrlash va tartiblash uchun backendlar
+    filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
+    
+    # Filtr parametrlari
     filterset_fields = {
-        'majburiy_topshiriq_turi': ['exact'],  # To‘g‘ri mos keladigan qiymatlar uchun
-        'boshlanish_vaqti': ['gte', 'lte'],  # Sanani oraliq bo‘yicha filtrlash
+        'majburiy_topshiriq_turi': ['exact'],  # Aniq qiymat bo‘yicha filter
+        'boshlanish_vaqti': ['gte', 'lte'],  # Sana oralig‘i bo‘yicha filter
         'tugash_vaqti': ['gte', 'lte'],
     }
+    
+    # Saralash mumkin bo‘lgan maydonlar
+    ordering_fields = ['boshlanish_vaqti', 'tugash_vaqti', 'majburiy_topshiriq_turi']
+    ordering = ['boshlanish_vaqti'] 
 
 
     
