@@ -74,7 +74,7 @@ class MajburiyTopshiriqViewSet(ModelViewSet):
     queryset = MajburiyTopshiriq.objects.all()
     http_method_names = ['get', 'patch']
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['topshiriq__active', 'baxolash', 'tur']
+    filterset_fields = ['topshiriq__active', 'tur']
 
 
     def get_serializer_class(self):
@@ -88,7 +88,7 @@ class QoshimchaTopshiriqViewSet(ModelViewSet):
     queryset = QoshimchaTopshiriq.objects.all()
     http_method_names = ['get', 'patch']
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['baxolash']
+    filterset_fields = []
 
     def get_serializer_class(self):
         if self.action in ['list', 'retrieve']:  # GET uchun
@@ -100,7 +100,7 @@ class OzSohasidaTopshiriqViewSet(ModelViewSet):
     queryset = OzSohasidaTopshiriq.objects.all()
     http_method_names = ['get', 'post', 'patch', 'delete']
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['baxolash']
+    filterset_fields = []
 
     def get_serializer_class(self):
         if self.action in ['list', 'retrieve']:  # GET uchun
@@ -112,7 +112,7 @@ class OzXohishiBilanTopshiriqViewSet(ModelViewSet):
     queryset = OzXohishiBilanTopshiriq.objects.all()
     http_method_names = ['get', 'post', 'patch', 'delete']
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['baxolash']
+    filterset_fields = []
 
     def get_serializer_class(self):
         if self.action in ['list', 'retrieve']:  # GET uchun
@@ -124,7 +124,7 @@ class TalabalarViewSet(ModelViewSet):
     queryset = Talabalar.objects.all()
     http_method_names = ['get', 'post', 'patch', 'delete']
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['baxolash']
+    filterset_fields = []
 
     def get_serializer_class(self):
         if self.action in ['list', 'retrieve']:  # GET uchun
