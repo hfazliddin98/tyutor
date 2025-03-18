@@ -111,15 +111,15 @@ REST_FRAMEWORK = {
 
 
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # Frontend domaingizni qo'shing
-    "http://localhost:3001",  # Frontend domaingizni qo'shing
-    "http://tyutr.kspi.uz",     
-    "https://tyutr.kspi.uz",
-    "http://tyutr2024.pythonanywhere.com",     
-    "https://tyutr2024.pythonanywhere.com",
-]
-
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:3000",  # Frontend domaingizni qo'shing
+#     "http://localhost:3001",  # Frontend domaingizni qo'shing
+#     "http://tyutr.kspi.uz",     
+#     "https://tyutr.kspi.uz",
+#     "http://tyutr2024.pythonanywhere.com",     
+#     "https://tyutr2024.pythonanywhere.com",
+# ]
+CORS_ALLOW_ALL_ORIGINS = True
 
 
 SIMPLE_JWT = {
