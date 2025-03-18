@@ -18,13 +18,15 @@ class SuperAdminMajburiyTopshiriqViewSet(ModelViewSet):
     http_method_names = ['get', 'post', 'patch', 'delete']
     filter_backends = [DjangoFilterBackend, OrderingFilter]
     filterset_fields = {
-        'boshlanish_vaqti': ['gte', 'lte'],  # Oraliqda saralash uchun
+        'majburiy_topshiriq_turi': ['exact'],  # To‘g‘ri mos keladigan qiymatlar uchun
+        'boshlanish_vaqti': ['gte', 'lte'],  # Sanani oraliq bo‘yicha filtrlash
         'tugash_vaqti': ['gte', 'lte'],
     }
     
     # Saralash mumkin bo‘lgan maydonlar
-    ordering_fields = ['boshlanish_vaqti', 'tugash_vaqti', 'nomi']
-    ordering = ['boshlanish_vaqti'] 
+    ordering_fields = ['boshlanish_vaqti', 'tugash_vaqti']
+    ordering = ['boshlanish_vaqti', 'tugash_vaqti']
+
     
     def perform_create(self, serializer):
         serializer.save(topshiriq_turi=TopshiriqTuriChoice.MAJBURIY)
