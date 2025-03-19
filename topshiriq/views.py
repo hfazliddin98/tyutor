@@ -140,8 +140,7 @@ class TalabalarViewSet(ModelViewSet):
     http_method_names = ['get', 'post', 'patch', 'delete']
     filter_backends = [DjangoFilterBackend]
     filterset_fields = [
-        'fakultet', 'yonalish',
-        'kurs', 'guruh', 'tyutor'
+            'guruh', 'sardor', 'tyutor'
         ]
 
     def get_serializer_class(self):

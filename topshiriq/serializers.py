@@ -2,7 +2,7 @@ from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField
 from users.models import Users
 from users.middleware import get_current_request
 from users.choices import UserRoleChoice
-from users.serializers import FakultetSerializer
+from users.serializers import FakultetSerializer, GuruhSerializer
 from topshiriq.models import Topshiriq, MajburiyTopshiriq, QoshimchaTopshiriq, OzSohasidaTopshiriq, OzXohishiBilanTopshiriq, Talabalar
 
 
@@ -159,11 +159,12 @@ class OzXohishiBilanTopshiriqPostSerializer(ModelSerializer):
 
 class TalabalarGetSerializer(ModelSerializer):
     tyutor = TopshiriqUserSerializer()
+    guruh= GuruhSerializer(many=True, read_only=True)  # ✅ To‘liq ma'lumotni qo‘shish
     class Meta:
         model = Talabalar
         fields = [
-           'id','fakultet', 'yonalish', 'kurs', 'guruh', 'tyutor',
-            'familya', 'ism', 'jins', 'tolov_status', 
+           'id','guruh', 'tyutor',
+            'familya', 'ism', 'jins', 'sardor', 'tolov_status', 
             'ijtimoiy_ximoya', 'ijtimoiy_daraja', 'iqdidorli_talaba','is_active'
         ]
 
@@ -171,8 +172,8 @@ class TalabalarPostSerializer(ModelSerializer):
     class Meta:
         model = Talabalar
         fields = [
-           'fakultet', 'yonalish', 'kurs', 'guruh', 'tyutor',
-            'familya', 'ism', 'jins', 'tolov_status', 
+           'guruh', 'tyutor',
+            'familya', 'ism', 'jins', 'sardor', 'tolov_status', 
             'ijtimoiy_ximoya', 'ijtimoiy_daraja', 'iqdidorli_talaba','is_active'
         ]
 

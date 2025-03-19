@@ -1,6 +1,6 @@
 from django.db import models
 from topshiriq.choices import TopshiriqTuriChoice, MajburiyTopshiriqTuriChoice, TalabaChoice, TolovChoice
-from users.models import AsosiyModel, Users
+from users.models import AsosiyModel, Users, Guruh
 
 
 
@@ -93,13 +93,11 @@ class OzXohishiBilanTopshiriq(AsosiyModel):
         return self.title
     
 class Talabalar(AsosiyModel):
-    fakultet = models.CharField(max_length=255)
-    yonalish = models.CharField(max_length=255)
-    kurs = models.CharField(max_length=255)
-    guruh = models.CharField(max_length=255)
+    guruh = models.ForeignKey(Guruh, on_delete=models.CASCADE)
     tyutor = models.ForeignKey(Users, on_delete=models.CASCADE)
     familya = models.CharField(max_length=255)
     ism = models.CharField(max_length=255)
+    sardor = models.BooleanField(default=False)
     jins = models.CharField(max_length=255, choices=TalabaChoice.choices, blank=True)
     tolov_status = models.CharField(max_length=255, choices=TolovChoice.choices, blank=True)
     ijtimoiy_ximoya = models.CharField(max_length=255,blank=True)
