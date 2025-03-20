@@ -159,12 +159,12 @@ class OzXohishiBilanTopshiriqPostSerializer(ModelSerializer):
 
 class TalabalarGetSerializer(ModelSerializer):
     tyutor = TopshiriqUserSerializer()
-    guruh= GuruhSerializer(many=True, read_only=True)  # ✅ To‘liq ma'lumotni qo‘shish
+    talaba_guruh= GuruhSerializer(many=True, read_only=True)  # ✅ To‘liq ma'lumotni qo‘shish
     class Meta:
         model = Talabalar
         fields = [
-           'id','guruh', 'tyutor',
-            'familya', 'ism', 'jins', 'sardor', 'tolov_status', 
+           'id','talaba_guruh', 'tyutor',
+            'familya', 'ism', 'nomer', 'jins', 'sardor', 'tolov_status', 
             'ijtimoiy_ximoya', 'ijtimoiy_daraja', 'iqdidorli_talaba','is_active'
         ]
 
@@ -173,7 +173,7 @@ class TalabalarPostSerializer(ModelSerializer):
         model = Talabalar
         fields = [
            'guruh', 'tyutor',
-            'familya', 'ism', 'jins', 'sardor', 'tolov_status', 
+            'familya', 'ism', 'nomer', 'jins', 'sardor', 'tolov_status', 
             'ijtimoiy_ximoya', 'ijtimoiy_daraja', 'iqdidorli_talaba','is_active'
         ]
 

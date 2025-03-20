@@ -1,5 +1,5 @@
 from django.contrib import admin
-from topshiriq.models import Topshiriq, MajburiyTopshiriq, QoshimchaTopshiriq
+from topshiriq.models import Topshiriq, MajburiyTopshiriq, QoshimchaTopshiriq, Talabalar, Testlar
 # from topshiriq.models import SuperAdminTopshiriq, SuperAdminMajburiyTopshiriq, SuperAdminQoshimchaTopshiriq
 
 
@@ -15,13 +15,13 @@ class MajburiyTopshiriqAdmin(admin.ModelAdmin):
 class QoshimchaTopshiriqAdmin(admin.ModelAdmin):
     list_display  = ['user', 'created_at']
 
-# @admin.register(SuperAdminTopshiriq)
-# class TopshiriqAdmin(admin.ModelAdmin):
-#     list_display  = ['id']
+@admin.register(Talabalar)
+class TalabalarAdmin(admin.ModelAdmin):
+    list_display  = ['id']
 
-# @admin.register(SuperAdminMajburiyTopshiriq)
-# class MajburiyTopshiriqAdmin(admin.ModelAdmin):
-#     list_display  = ['id', 'user', 'created_at']
+@admin.register(Testlar)
+class TestlarAdmin(admin.ModelAdmin):
+    list_display  = ['id']
 
 # @admin.register(SuperAdminQoshimchaTopshiriq)
 # class QoshimchaTopshiriqAdmin(admin.ModelAdmin):

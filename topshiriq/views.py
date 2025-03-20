@@ -147,5 +147,7 @@ class TalabalarViewSet(ModelViewSet):
         if self.action in ['list', 'retrieve']:  # GET uchun
             return TalabalarGetSerializer
         return TalabalarPostSerializer  # POST, PUT, PATCH uchun
+    
+# class Test()
 
 

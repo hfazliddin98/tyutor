@@ -93,10 +93,11 @@ class OzXohishiBilanTopshiriq(AsosiyModel):
         return self.title
     
 class Talabalar(AsosiyModel):
-    guruh = models.ForeignKey(Guruh, on_delete=models.CASCADE)
-    tyutor = models.ForeignKey(Users, on_delete=models.CASCADE)
-    familya = models.CharField(max_length=255)
-    ism = models.CharField(max_length=255)
+    guruh = models.ForeignKey(Guruh, on_delete=models.CASCADE, related_name="talaba_guruh", blank=True)
+    tyutor = models.ForeignKey(Users, on_delete=models.CASCADE, blank=True)
+    familya = models.CharField(max_length=255, blank=True)
+    ism = models.CharField(max_length=255, blank=True)
+    nomer = models.CharField(max_length=255, blank=True)
     sardor = models.BooleanField(default=False)
     jins = models.CharField(max_length=255, choices=TalabaChoice.choices, blank=True)
     tolov_status = models.CharField(max_length=255, choices=TolovChoice.choices, blank=True)
@@ -106,3 +107,18 @@ class Talabalar(AsosiyModel):
 
     def __str__(self):
         return self.familya
+    
+
+class Testlar(AsosiyModel):
+    tyutor = models.ForeignKey(Users, on_delete=models.CASCADE)
+    savol = models.TextField()
+    a = models.CharField(max_length=255)
+    b = models.CharField(max_length=255)
+    c = models.CharField(max_length=255)
+    d = models.CharField(max_length=255)
+    togri = models.CharField(max_length=255, blank=True)
+    notogri = models.CharField(max_length=255, blank=True)
+    boshlanish = models.DateField()
+    tugash = models.DateField()
+
+    
