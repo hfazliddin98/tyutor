@@ -2,7 +2,7 @@ from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField
 from .models import Users, Fakultet, Yonalish, Kurs, Guruh, Talaba
 
 
-
+# Talaba
 
 class TalabaGetSerializer(ModelSerializer):
     class Meta:
@@ -22,6 +22,8 @@ class TalabaPostSerializer(ModelSerializer):
             'ijtimoiy_ximoya', 'ijtimoiy_daraja', 'iqdidorli_talaba','is_active'
         ]
 
+# Guruh
+
 class GuruhGetSerializer(ModelSerializer):
     talabalar = TalabaGetSerializer(many=True, read_only=True)
     class Meta:
@@ -32,6 +34,8 @@ class GuruhPostSerializer(ModelSerializer):
     class Meta:
         model = Guruh
         fields = ['kurs', 'name', 'is_active']
+
+# Kurs
 
 class KursGetSerializer(ModelSerializer):
     guruhlar = GuruhGetSerializer(many=True, read_only=True)
@@ -44,6 +48,8 @@ class KursPostSerializer(ModelSerializer):
         model = Kurs
         fields = ['yonalish', 'name', 'is_active']
 
+# Yonalish
+
 class YonalishGetSerializer(ModelSerializer):
     kurslar = KursGetSerializer(many=True, read_only=True)
     class Meta:
@@ -54,6 +60,8 @@ class YonalishPostSerializer(ModelSerializer):
     class Meta:
         model = Yonalish
         fields = ['fakultet', 'name', 'is_active']
+
+# Fakultet
 
 class FakultetGetSerializer(ModelSerializer):
     yonalishlar = YonalishGetSerializer(many=True, read_only=True)
