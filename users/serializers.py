@@ -1,12 +1,32 @@
 from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField
-from .models import Users, Fakultet, Yonalish, Kurs, Guruh
+from .models import Users, Fakultet, Yonalish, Kurs, Guruh, Talaba
 
 
+
+
+class TalabaGetSerializer(ModelSerializer):
+    class Meta:
+        model = Talaba
+        fields = [
+           'id', 'tyutor',
+            'familya', 'ism', 'nomer', 'jins', 'sardor', 'tolov_status', 
+            'ijtimoiy_ximoya', 'ijtimoiy_daraja', 'iqdidorli_talaba','is_active'
+        ]
+
+class TalabaPostSerializer(ModelSerializer):
+    class Meta:
+        model = Talaba
+        fields = [
+           'guruh', 'tyutor',
+            'familya', 'ism', 'nomer', 'jins', 'sardor', 'tolov_status', 
+            'ijtimoiy_ximoya', 'ijtimoiy_daraja', 'iqdidorli_talaba','is_active'
+        ]
 
 class GuruhGetSerializer(ModelSerializer):
+    talabalar = TalabaGetSerializer(many=True, read_only=True)
     class Meta:
         model = Guruh
-        fields = ['id', 'name', 'is_active']
+        fields = ['id', 'name', 'is_active', 'talabalar']
 
 class GuruhPostSerializer(ModelSerializer):
     class Meta:
@@ -79,7 +99,7 @@ class GuruhSerializer(ModelSerializer):
 
 
 class UserGetSerializer(ModelSerializer):
-    guruh= GuruhSerializer(many=True, read_only=True)  # ✅ To‘liq ma'lumotni qo‘shish
+    guruh = GuruhSerializer(many=True, read_only=True)  # ✅ To‘liq ma'lumotni qo‘shish
     fakultet = FakultetSerializer()
 
     class Meta:

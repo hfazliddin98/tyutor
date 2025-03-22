@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.models import Group
-from users.models import Users, Fakultet, Yonalish, Kurs, Guruh
+from users.models import Users, Fakultet, Yonalish, Kurs, Guruh, Talaba
 
 @admin.register(Users)
 class UserAdmin(admin.ModelAdmin):
@@ -33,6 +33,10 @@ class GuruhAdmin(admin.ModelAdmin):
     list_display  = [
         'name', 
     ]
+
+@admin.register(Talaba)
+class TalabaAdmin(admin.ModelAdmin):
+    list_display  = ['id']
     
 
 admin.site.unregister(Group)

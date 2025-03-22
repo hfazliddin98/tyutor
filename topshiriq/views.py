@@ -4,12 +4,11 @@ from rest_framework import filters
 from users.choices import UserRoleChoice
 from topshiriq.choices import TopshiriqTuriChoice
 from topshiriq.models import Topshiriq, MajburiyTopshiriq, QoshimchaTopshiriq
-from topshiriq.models import OzSohasidaTopshiriq, OzXohishiBilanTopshiriq, Talabalar
+from topshiriq.models import OzSohasidaTopshiriq, OzXohishiBilanTopshiriq
 from topshiriq.serializers import MajburiyTopshiriqGetSerializer, MajburiyTopshiriqPostSerializer, QoshimchaTopshiriqGetSerializer, QoshimchaTopshiriqPostSerializer
 from topshiriq.serializers import OzSohasidaTopshiriqGetSerializer, OzSohasidaTopshiriqPostSerializer, OzXohishiBilanTopshiriqGetSerializer, OzXohishiBilanTopshiriqPostSerializer
 from topshiriq.serializers import SuperAdminMajburiyTopshiriqPostSerializer, SuperAdminQoshimchaTopshiriqSerializer, SuperAdminOzSohasidaTopshiriqSerializer
 from topshiriq.serializers import SuperAdminMajburiyTopshiriqGetSerializer, SuperAdminQoshimchaTopshiriqSerializer,AdminQoshimchaTopshiriqSerializer
-from topshiriq.serializers import TalabalarGetSerializer, TalabalarPostSerializer
 
 
 # Superadmin
@@ -135,18 +134,6 @@ class OzXohishiBilanTopshiriqViewSet(ModelViewSet):
         return OzXohishiBilanTopshiriqPostSerializer  # POST, PUT, PATCH uchun
 
 
-class TalabalarViewSet(ModelViewSet):
-    queryset = Talabalar.objects.all()
-    http_method_names = ['get', 'post', 'patch', 'delete']
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = [
-            'guruh', 'sardor', 'tyutor'
-        ]
-
-    def get_serializer_class(self):
-        if self.action in ['list', 'retrieve']:  # GET uchun
-            return TalabalarGetSerializer
-        return TalabalarPostSerializer  # POST, PUT, PATCH uchun
     
 # class Test()
 

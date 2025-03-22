@@ -5,10 +5,11 @@ from django.http import HttpResponse
 from rest_framework_simplejwt.tokens import AccessToken
 from datetime import datetime, timezone, timedelta
 from rest_framework.viewsets import ModelViewSet
-from .models import Users,Fakultet, Yonalish, Kurs, Guruh
-from .serializers import UserGetSerializer, UserPostSerializer
-from .serializers import FakultetGetSerializer, FakultetPostSerializer, YonalishGetSerializer, YonalishPostSerializer
-from .serializers import KursGetSerializer, KursPostSerializer, GuruhGetSerializer, GuruhPostSerializer
+from users.models import Users,Fakultet, Yonalish, Kurs, Guruh, Talaba
+from users.serializers import UserGetSerializer, UserPostSerializer
+from users.serializers import FakultetGetSerializer, FakultetPostSerializer, YonalishGetSerializer, YonalishPostSerializer
+from users.serializers import KursGetSerializer, KursPostSerializer, GuruhGetSerializer, GuruhPostSerializer
+from users.serializers import TalabaGetSerializer, TalabaPostSerializer
 
 
 @csrf_exempt
@@ -83,3 +84,12 @@ class GuruhViewSet(ModelViewSet):
         if self.action in ['list', 'retrieve']:  # GET uchun
             return GuruhGetSerializer
         return GuruhPostSerializer  # POST, PUT, PATCH uchun
+
+class TalabaViewSet(ModelViewSet):
+    queryset = Talaba.objects.all()
+    http_method_names = ['get', 'post', 'patch']
+
+    def get_serializer_class(self):
+        if self.action in ['list', 'retrieve']:  # GET uchun
+            return TalabaGetSerializer
+        return TalabaPostSerializer  # POST, PUT, PATCH uchun

@@ -12,5 +12,15 @@ class KursRoleChoice(models.TextChoices):
     TORT = ("4", "4")
     BESH = ("5", "5")
 
+
+
+class TalabaChoice(models.TextChoices):
+    OGIL= ("o`g`il", "o`g`il")
+    QIZ = ("qiz", "qiz")
+
+class TolovChoice(models.TextChoices):
+    GRAND= ("grand", "grand")
+    KONTRAKT = ("kontrakt", "kontrakt")
+
         
 

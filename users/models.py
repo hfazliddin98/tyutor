@@ -1,7 +1,7 @@
 import uuid
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from users.choices import UserRoleChoice, KursRoleChoice
+from users.choices import UserRoleChoice, KursRoleChoice, TalabaChoice, TolovChoice
 
 
 class AsosiyModel(models.Model):
@@ -44,6 +44,7 @@ class Guruh(AsosiyModel):
     def __str__(self):
         full_name = f'{self.kurs.yonalish.fakultet.name} fakulteti {self.kurs.yonalish.name} yonalishi {self.kurs.name} kursi {self.name} guruhi'
         return full_name
+    
 
 
 class Users(AbstractUser):
@@ -56,5 +57,21 @@ class Users(AbstractUser):
 
     class Meta:
         ordering = ['-date_joined']
+
+class Talaba(AsosiyModel):
+    guruh = models.ForeignKey(Guruh, on_delete=models.CASCADE, related_name="talabalar", blank=True)
+    tyutor = models.ForeignKey(Users, on_delete=models.CASCADE, blank=True)
+    familya = models.CharField(max_length=255, blank=True)
+    ism = models.CharField(max_length=255, blank=True)
+    nomer = models.CharField(max_length=255, blank=True)
+    sardor = models.BooleanField(default=False)
+    jins = models.CharField(max_length=255, choices=TalabaChoice.choices, blank=True)
+    tolov_status = models.CharField(max_length=255, choices=TolovChoice.choices, blank=True)
+    ijtimoiy_ximoya = models.CharField(max_length=255,blank=True)
+    ijtimoiy_daraja = models.CharField(max_length=255,blank=True)
+    iqdidorli_talaba = models.CharField(max_length=255,blank=True)
+
+    def __str__(self):
+        return self.familya
 
 

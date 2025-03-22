@@ -2,8 +2,8 @@ from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField
 from users.models import Users
 from users.middleware import get_current_request
 from users.choices import UserRoleChoice
-from users.serializers import FakultetSerializer, GuruhSerializer
-from topshiriq.models import Topshiriq, MajburiyTopshiriq, QoshimchaTopshiriq, OzSohasidaTopshiriq, OzXohishiBilanTopshiriq, Talabalar
+from users.models import Fakultet
+from topshiriq.models import Topshiriq, MajburiyTopshiriq, QoshimchaTopshiriq, OzSohasidaTopshiriq, OzXohishiBilanTopshiriq
 
 
 # Superadmin
@@ -72,8 +72,14 @@ class AdminQoshimchaTopshiriqSerializer(ModelSerializer):
         
         
 # Topshirqlar
+
+class TopshiriqFakultetSerializer(ModelSerializer):
+    class Meta:
+        model = Fakultet
+        fields = ['id', 'name', 'is_active',]
+
 class TopshiriqUserSerializer(ModelSerializer):
-    fakultet = FakultetSerializer()  # Faqatgina GET uchun detallarni ko'rsatadi
+    fakultet = TopshiriqFakultetSerializer()  # Faqatgina GET uchun detallarni ko'rsatadi
 
     class Meta:
         model = Users
@@ -157,24 +163,6 @@ class OzXohishiBilanTopshiriqPostSerializer(ModelSerializer):
            'user', 'title', 'body', 'file1', 'file2', 'file3', 'file4', 'is_active'
         ]
 
-class TalabalarGetSerializer(ModelSerializer):
-    tyutor = TopshiriqUserSerializer()
-    talaba_guruh= GuruhSerializer(many=True, read_only=True)  # ✅ To‘liq ma'lumotni qo‘shish
-    class Meta:
-        model = Talabalar
-        fields = [
-           'id','talaba_guruh', 'tyutor',
-            'familya', 'ism', 'nomer', 'jins', 'sardor', 'tolov_status', 
-            'ijtimoiy_ximoya', 'ijtimoiy_daraja', 'iqdidorli_talaba','is_active'
-        ]
 
-class TalabalarPostSerializer(ModelSerializer):
-    class Meta:
-        model = Talabalar
-        fields = [
-           'guruh', 'tyutor',
-            'familya', 'ism', 'nomer', 'jins', 'sardor', 'tolov_status', 
-            'ijtimoiy_ximoya', 'ijtimoiy_daraja', 'iqdidorli_talaba','is_active'
-        ]
 
 
