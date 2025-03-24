@@ -9,6 +9,8 @@ from topshiriq.serializers import MajburiyTopshiriqGetSerializer, MajburiyTopshi
 from topshiriq.serializers import OzSohasidaTopshiriqGetSerializer, OzSohasidaTopshiriqPostSerializer, OzXohishiBilanTopshiriqGetSerializer, OzXohishiBilanTopshiriqPostSerializer
 from topshiriq.serializers import SuperAdminMajburiyTopshiriqPostSerializer, SuperAdminQoshimchaTopshiriqSerializer, SuperAdminOzSohasidaTopshiriqSerializer
 from topshiriq.serializers import SuperAdminMajburiyTopshiriqGetSerializer, SuperAdminQoshimchaTopshiriqSerializer,AdminQoshimchaTopshiriqSerializer
+from topshiriq.pagination import MajburiyTopshiriqPagination
+
 
 
 # Superadmin
@@ -17,6 +19,7 @@ class SuperAdminMajburiyTopshiriqViewSet(ModelViewSet):
     queryset = Topshiriq.objects.filter(admin_user__role=UserRoleChoice.SUPERADMIN).filter(topshiriq_turi=TopshiriqTuriChoice.MAJBURIY)
     http_method_names = ['get', 'post', 'patch', 'delete']
     filter_backends = [DjangoFilterBackend]
+    pagination_class = MajburiyTopshiriqPagination
 
     # Filtrlash va tartiblash uchun backendlar
     filter_backends = [DjangoFilterBackend, filters.OrderingFilter]

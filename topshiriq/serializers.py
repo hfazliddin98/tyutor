@@ -101,7 +101,7 @@ class MajburiyTopshiriqGetSerializer(ModelSerializer):
     class Meta:
         model = MajburiyTopshiriq
         fields = [
-            'id', 'user', 'topshiriq', 'tur',
+            'id', 'user', 'topshiriq', 'tur', 'baxo', 'baxolash',
             'title', 'body', 'file1', 'file2', 'file3', 'file4', 'is_active'
         ]
 
