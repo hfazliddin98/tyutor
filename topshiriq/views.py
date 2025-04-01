@@ -9,7 +9,7 @@ from topshiriq.serializers import MajburiyTopshiriqGetSerializer, MajburiyTopshi
 from topshiriq.serializers import OzSohasidaTopshiriqGetSerializer, OzSohasidaTopshiriqPostSerializer, OzXohishiBilanTopshiriqGetSerializer, OzXohishiBilanTopshiriqPostSerializer
 from topshiriq.serializers import SuperAdminMajburiyTopshiriqPostSerializer, SuperAdminQoshimchaTopshiriqSerializer, SuperAdminOzSohasidaTopshiriqSerializer
 from topshiriq.serializers import SuperAdminMajburiyTopshiriqGetSerializer, SuperAdminQoshimchaTopshiriqSerializer,AdminQoshimchaTopshiriqSerializer
-from topshiriq.pagination import MajburiyTopshiriqPagination
+from topshiriq.pagination import TopshiriqPagination
 
 
 
@@ -19,7 +19,7 @@ class SuperAdminMajburiyTopshiriqViewSet(ModelViewSet):
     queryset = Topshiriq.objects.filter(admin_user__role=UserRoleChoice.SUPERADMIN).filter(topshiriq_turi=TopshiriqTuriChoice.MAJBURIY)
     http_method_names = ['get', 'post', 'patch', 'delete']
     filter_backends = [DjangoFilterBackend]
-    pagination_class = MajburiyTopshiriqPagination
+    pagination_class = TopshiriqPagination
 
     # Filtrlash va tartiblash uchun backendlar
     filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
@@ -50,6 +50,7 @@ class SuperAdminQoshimchaTopshiriqViewSet(ModelViewSet):
     queryset = Topshiriq.objects.filter(admin_user__role=UserRoleChoice.SUPERADMIN).filter(topshiriq_turi=TopshiriqTuriChoice.QOSHIMCHA)
     serializer_class = SuperAdminQoshimchaTopshiriqSerializer
     http_method_names = ['get', 'post', 'patch', 'delete']
+    pagination_class = TopshiriqPagination
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['boshlanish_vaqti', 'tugash_vaqti']
 
@@ -65,6 +66,7 @@ class SuperAdminOzSohasidaTopshiriqViewSet(ModelViewSet):
     queryset = Topshiriq.objects.filter(admin_user__role=UserRoleChoice.SUPERADMIN).filter(topshiriq_turi=TopshiriqTuriChoice.OZ_SOHASIDA)
     serializer_class = SuperAdminOzSohasidaTopshiriqSerializer
     http_method_names = ['get', 'post', 'patch', 'delete']
+    pagination_class = TopshiriqPagination
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['boshlanish_vaqti', 'tugash_vaqti']
 
@@ -116,6 +118,7 @@ class QoshimchaTopshiriqViewSet(ModelViewSet):
 class OzSohasidaTopshiriqViewSet(ModelViewSet):
     queryset = OzSohasidaTopshiriq.objects.all()
     http_method_names = ['get', 'post', 'patch', 'delete']
+    pagination_class = TopshiriqPagination
     filter_backends = [DjangoFilterBackend]
     filterset_fields = []
 
@@ -128,6 +131,7 @@ class OzSohasidaTopshiriqViewSet(ModelViewSet):
 class OzXohishiBilanTopshiriqViewSet(ModelViewSet):
     queryset = OzXohishiBilanTopshiriq.objects.all()
     http_method_names = ['get', 'post', 'patch', 'delete']
+    pagination_class = TopshiriqPagination
     filter_backends = [DjangoFilterBackend]
     filterset_fields = []
 

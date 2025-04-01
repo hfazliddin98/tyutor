@@ -94,6 +94,7 @@ class OzXohishiBilanTopshiriq(AsosiyModel):
     
 
 class Testlar(AsosiyModel):
+    topshiriq = models.ForeignKey(Topshiriq, on_delete=models.CASCADE)
     tyutor = models.ForeignKey(Users, on_delete=models.CASCADE)
     savol = models.TextField()
     a = models.CharField(max_length=255)
