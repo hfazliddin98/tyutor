@@ -108,7 +108,7 @@ class GuruhSerializer(ModelSerializer):
 
 class UserGetSerializer(ModelSerializer):
     guruh = GuruhSerializer(many=True, read_only=True)  # ✅ To‘liq ma'lumotni qo‘shish
-    fakultet = FakultetSerializer()
+    fakultet = FakultetGetSerializer()
 
     class Meta:
         model = Users

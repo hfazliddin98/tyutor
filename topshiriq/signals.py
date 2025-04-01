@@ -3,7 +3,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from users.middleware import get_current_request
 from django.dispatch import receiver
 from users.choices import UserRoleChoice
-from topshiriq.choices import TopshiriqTuriChoice
+from topshiriq.choices import TopshiriqTuriChoice, MajburiyTopshiriqTuriChoice
 from topshiriq.models import Topshiriq, MajburiyTopshiriq, QoshimchaTopshiriq
 
 

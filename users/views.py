@@ -29,7 +29,7 @@ def token_vaqt(request, token):
 
 
 class UserViewSet(ModelViewSet):
-    queryset = Users.objects.filter(is_superuser=False)
+    # queryset = Users.objects.filter(is_superuser=False)
     http_method_names = ['get', 'post', 'patch']
     filter_backends = [DjangoFilterBackend,]
     filterset_fields = [
@@ -40,6 +40,28 @@ class UserViewSet(ModelViewSet):
         if self.action in ['list', 'retrieve']:  # GET uchun
             return UserGetSerializer
         return UserPostSerializer  # POST, PUT, PATCH uchun
+    
+    def get_queryset(self):
+        queryset = Users.objects.prefetch_related('guruh').filter(is_superuser=False)
+        fakultet_id = self.request.query_params.get('fakultet', None)
+
+        if fakultet_id:
+            queryset = queryset.filter(fakultet_id=fakultet_id)
+
+        return queryset
+    
+# class UserViewSet(ModelViewSet):
+#     queryset = Users.objects.filter(is_superuser=False)
+#     http_method_names = ['get', 'post', 'patch']
+#     filter_backends = [DjangoFilterBackend,]
+#     filterset_fields = [
+#         'username', 'role', 'fakultet'
+#     ]
+
+#     def get_serializer_class(self):
+#         if self.action in ['list', 'retrieve']:  # GET uchun
+#             return UserGetSerializer
+#         return UserPostSerializer  # POST, PUT, PATCH uchun
 
 
 class FakultetViewSet(ModelViewSet):
