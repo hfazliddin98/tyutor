@@ -123,7 +123,8 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(days=1), # acses token necha kun amal qilishi
+    # "ACCESS_TOKEN_LIFETIME": timedelta(days=1), # acses token necha kun amal qilishi
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=2), # acses token necha kun amal qilishi
     "REFRESH_TOKEN_LIFETIME": timedelta(days=3), # acses tokeni yangilash uchun refresh tokenni necha kun amal qilishi
     "ROTATE_REFRESH_TOKENS": False,
     "BLACKLIST_AFTER_ROTATION": False,

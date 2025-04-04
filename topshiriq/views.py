@@ -93,7 +93,7 @@ class MajburiyTopshiriqViewSet(ModelViewSet):
     queryset = MajburiyTopshiriq.objects.all()
     http_method_names = ['get', 'patch']
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['topshiriq__active', 'tur']
+    filterset_fields = ['topshiriq__active', 'tur', 'user__username']
 
 
     def get_serializer_class(self):
@@ -107,7 +107,7 @@ class QoshimchaTopshiriqViewSet(ModelViewSet):
     queryset = QoshimchaTopshiriq.objects.all()
     http_method_names = ['get', 'patch']
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = []
+    filterset_fields = ['user__username']
 
     def get_serializer_class(self):
         if self.action in ['list', 'retrieve']:  # GET uchun
