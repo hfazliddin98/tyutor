@@ -9,11 +9,11 @@ class TopshiriqAdmin(admin.ModelAdmin):
 
 @admin.register(MajburiyTopshiriq)
 class MajburiyTopshiriqAdmin(admin.ModelAdmin):
-    list_display  = ['user', 'created_at']
+    list_display  = ['id', 'user', 'baxolash', 'created_at']
 
 @admin.register(QoshimchaTopshiriq)
 class QoshimchaTopshiriqAdmin(admin.ModelAdmin):
-    list_display  = ['user', 'created_at']
+    list_display  = ['id', 'user', 'baxolash', 'created_at']
 
 
 

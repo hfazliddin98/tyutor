@@ -55,6 +55,7 @@ class QoshimchaTopshiriq(AsosiyModel):
     file2 = models.FileField(upload_to='topshiriq/qoshimcha', null=True, blank=True)
     file3 = models.FileField(upload_to='topshiriq/qoshimcha', null=True, blank=True)
     file4 = models.FileField(upload_to='topshiriq/qoshimcha', null=True, blank=True)
+    admin = models.BooleanField(default=False)
     baxolash = models.BooleanField(default=False)
 
     def __str__(self):

@@ -31,9 +31,10 @@ def task_users_added(sender, instance, action, **kwargs):
 
     if action == "post_add" and processing_tasks.get(instance.pk):
 
-        if request.user.role == UserRoleChoice.SUPERADMIN:
+        if instance.topshiriq_turi == TopshiriqTuriChoice.MAJBURIY:
 
-            if instance.topshiriq_turi == TopshiriqTuriChoice.MAJBURIY:
+            if request.user.role == UserRoleChoice.SUPERADMIN:
+
                 for user in instance.topshiriq_users.all():
                     for _ in range(int(instance.topshiriq_soni)):
                         MajburiyTopshiriq.objects.create(
@@ -42,24 +43,25 @@ def task_users_added(sender, instance, action, **kwargs):
                             tur=instance.majburiy_topshiriq_turi
                         )
 
-            if instance.topshiriq_turi == TopshiriqTuriChoice.QOSHIMCHA:
+        elif instance.topshiriq_turi == TopshiriqTuriChoice.QOSHIMCHA:
+
+            if request.user.role == UserRoleChoice.ADMIN:
+
                 for user in instance.topshiriq_users.all():
                     for _ in range(int(instance.topshiriq_soni)):
                         QoshimchaTopshiriq.objects.create(
                             user=user,  # To‘g‘ri foydalanuvchini saqlash
-                            topshiriq=instance
+                            topshiriq=instance,
+                            admin=True
                         )
-
-
-
-        if request.user.role == UserRoleChoice.ADMIN:
-            if instance.topshiriq_turi == TopshiriqTuriChoice.QOSHIMCHA:
+            else:
                 for user in instance.topshiriq_users.all():
                     for _ in range(int(instance.topshiriq_soni)):
                         QoshimchaTopshiriq.objects.create(
                             user=user, 
                             topshiriq=instance # ID emas, obyektning o‘zi
                         )
+
 
         # Signal ishlaganidan keyin flagni olib tashlaymiz
         processing_tasks.pop(instance.pk, None)
