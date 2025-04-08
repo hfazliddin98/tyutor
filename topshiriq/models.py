@@ -18,7 +18,7 @@ class  Topshiriq(AsosiyModel):
     file2 = models.FileField(upload_to='topshiriq/topshiriq', null=True, blank=True)
     file3 = models.FileField(upload_to='topshiriq/topshiriq', null=True, blank=True)
     file4 = models.FileField(upload_to='topshiriq/topshiriq', null=True, blank=True)
-    test_file = models.FileField(upload_to='topshiriq/topshiriq/test', null=True, blank=True)
+    test_data = models.JSONField()
     active = models.BooleanField(default=False)
     vaqt_tugadi = models.BooleanField(default=False)
     boshlanish_vaqti = models.DateField()
@@ -95,16 +95,12 @@ class OzXohishiBilanTopshiriq(AsosiyModel):
     
 
 class Testlar(AsosiyModel):
-    topshiriq = models.ForeignKey(Topshiriq, on_delete=models.CASCADE)
-    tyutor = models.ForeignKey(Users, on_delete=models.CASCADE)
     savol = models.TextField()
     a = models.CharField(max_length=255)
     b = models.CharField(max_length=255)
     c = models.CharField(max_length=255)
     d = models.CharField(max_length=255)
     togri = models.CharField(max_length=255, blank=True)
-    notogri = models.CharField(max_length=255, blank=True)
-    boshlanish = models.DateField()
-    tugash = models.DateField()
+
 
     

@@ -35,13 +35,17 @@ def task_users_added(sender, instance, action, **kwargs):
 
             if request.user.role == UserRoleChoice.SUPERADMIN:
 
-                for user in instance.topshiriq_users.all():
-                    for _ in range(int(instance.topshiriq_soni)):
-                        MajburiyTopshiriq.objects.create(
-                            user=user,  # To‘g‘ri foydalanuvchini saqlash
-                            topshiriq=instance, 
-                            tur=instance.majburiy_topshiriq_turi
-                        )
+                if instance.majburiy_topshiriq_turi == MajburiyTopshiriqTuriChoice.TEST:
+                    print(f'test')
+                    print(f'file {instance.test_file}')
+                else:
+                    for user in instance.topshiriq_users.all():
+                        for _ in range(int(instance.topshiriq_soni)):
+                            MajburiyTopshiriq.objects.create(
+                                user=user,  # To‘g‘ri foydalanuvchini saqlash
+                                topshiriq=instance, 
+                                tur=instance.majburiy_topshiriq_turi
+                            )
 
         elif instance.topshiriq_turi == TopshiriqTuriChoice.QOSHIMCHA:
 
