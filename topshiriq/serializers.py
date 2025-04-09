@@ -4,6 +4,7 @@ from users.middleware import get_current_request
 from users.choices import UserRoleChoice
 from users.models import Fakultet
 from topshiriq.models import Topshiriq, MajburiyTopshiriq, QoshimchaTopshiriq, OzSohasidaTopshiriq, OzXohishiBilanTopshiriq
+from topshiriq.models import Test
 
 
 # Superadmin
@@ -165,4 +166,13 @@ class OzXohishiBilanTopshiriqPostSerializer(ModelSerializer):
 
 
 
+class TestSerializer(ModelSerializer):
+    class Meta:
+        model = Test
+        fields = [
+            'id', 'matn', 'variant_a', 'variant_b', 'variant_c', 'variant_d'
+        ]
+        extra_kwargs = {
+            'togri_javob': {'write_only': True}
+        }
 

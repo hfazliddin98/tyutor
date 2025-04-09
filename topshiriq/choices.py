@@ -28,4 +28,11 @@ class TolovChoice(models.TextChoices):
     GRAND= ("grand", "grand")
     KONTRAKT = ("kontrakt", "kontrakt")
 
+class TestChoice(models.TextChoices):
+    A= ("A", "A")
+    B= ("B", "B")
+    C= ("C", "C")
+    D = ("D", "D")
+
+
 

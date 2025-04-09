@@ -1,5 +1,5 @@
 from django.db import models
-from topshiriq.choices import TopshiriqTuriChoice, MajburiyTopshiriqTuriChoice
+from topshiriq.choices import TopshiriqTuriChoice, MajburiyTopshiriqTuriChoice, TestChoice
 from users.models import AsosiyModel, Users
 
 
@@ -18,7 +18,6 @@ class Topshiriq(AsosiyModel):
     file2 = models.FileField(upload_to='topshiriq/topshiriq', null=True, blank=True)
     file3 = models.FileField(upload_to='topshiriq/topshiriq', null=True, blank=True)
     file4 = models.FileField(upload_to='topshiriq/topshiriq', null=True, blank=True)
-    test_data = models.JSONField()
     active = models.BooleanField(default=False)
     vaqt_tugadi = models.BooleanField(default=False)
     boshlanish_vaqti = models.DateField()
@@ -102,28 +101,34 @@ class Test(AsosiyModel):
     variant_d = models.CharField(max_length=255)
     togri_javob = models.CharField(
         max_length=1,
-        choices=[('A', 'A'), ('B', 'B'), ('C', 'C'), ('D', 'D')],
-        verbose_name="To‘g‘ri javob"
+        choices=TestChoice.choices,
+        verbose_name="To‘g‘ri javob",
+        default=TestChoice.A
     )
 
     def __str__(self):
         return self.matn
     
 class TestTopshiriq(AsosiyModel):
+    user = models.ForeignKey(Users, on_delete=models.CASCADE) # tyutor uchun
     topshiriq = models.ForeignKey(Topshiriq, on_delete=models.CASCADE, related_name='topshiriqlar')
     test = models.ForeignKey(Test, on_delete=models.CASCADE)
     active = models.BooleanField(default=False)
-    boshlanish_vaqti = models.DateTimeField(blank=True)
-    tugash_vaqti = models.DateTimeField(blank=True)
-
 
 
 class TestJavob(AsosiyModel):
-    user = models.ForeignKey(Users, on_delete=models.CASCADE) # tyutor uchun
-    topshiriq = models.ForeignKey(Topshiriq, on_delete=models.CASCADE, related_name='javoblar')
-    test = models.ForeignKey(Test, on_delete=models.CASCADE)
+    test_topshiriq = models.ForeignKey(TestTopshiriq, on_delete=models.CASCADE, related_name='javoblar')
     tanlangan_javob = models.CharField(max_length=1)  # A/B/C/D
     togri = models.BooleanField(default=False)
+
+
+class TestNatija(AsosiyModel):
+    topshiriq = models.OneToOneField(Topshiriq, on_delete=models.CASCADE, related_name='natijalar')
+    user = models.ForeignKey(Users, on_delete=models.CASCADE)
+    togri_soni = models.IntegerField()
+    jami_soni = models.IntegerField()
+    foiz = models.FloatField()
+
 
 
 
