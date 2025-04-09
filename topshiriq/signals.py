@@ -37,7 +37,7 @@ def task_users_added(sender, instance, action, **kwargs):
 
                 if instance.majburiy_topshiriq_turi == MajburiyTopshiriqTuriChoice.TEST:
                     print(f'test')
-                    print(f'file {instance.test_file}')
+                    print(f'file {instance.id}')
                 else:
                     for user in instance.topshiriq_users.all():
                         for _ in range(int(instance.topshiriq_soni)):

@@ -5,7 +5,7 @@ from users.models import AsosiyModel, Users
 
 
 
-class  Topshiriq(AsosiyModel):
+class Topshiriq(AsosiyModel):
     admin_user = models.ForeignKey(Users, on_delete=models.CASCADE, null=True, blank=True) # superadmin yoki admin uchun
     topshiriq_users = models.ManyToManyField(Users, related_name="users")  # kopgina userlar uchun
     topshiriq_turi = models.CharField(max_length=30, choices=TopshiriqTuriChoice.choices, default=TopshiriqTuriChoice.QOSHIMCHA)
@@ -94,13 +94,38 @@ class OzXohishiBilanTopshiriq(AsosiyModel):
         return self.title
     
 
-class Testlar(AsosiyModel):
-    savol = models.TextField()
-    a = models.CharField(max_length=255)
-    b = models.CharField(max_length=255)
-    c = models.CharField(max_length=255)
-    d = models.CharField(max_length=255)
-    togri = models.CharField(max_length=255, blank=True)
+class Test(AsosiyModel):
+    matn = models.TextField(verbose_name="Savol matni")
+    variant_a = models.CharField(max_length=255)
+    variant_b = models.CharField(max_length=255)
+    variant_c = models.CharField(max_length=255)
+    variant_d = models.CharField(max_length=255)
+    togri_javob = models.CharField(
+        max_length=1,
+        choices=[('A', 'A'), ('B', 'B'), ('C', 'C'), ('D', 'D')],
+        verbose_name="To‘g‘ri javob"
+    )
+
+    def __str__(self):
+        return self.matn
+    
+class TestTopshiriq(AsosiyModel):
+    topshiriq = models.ForeignKey(Topshiriq, on_delete=models.CASCADE, related_name='topshiriqlar')
+    test = models.ForeignKey(Test, on_delete=models.CASCADE)
+    active = models.BooleanField(default=False)
+    boshlanish_vaqti = models.DateTimeField(blank=True)
+    tugash_vaqti = models.DateTimeField(blank=True)
+
+
+
+class TestJavob(AsosiyModel):
+    user = models.ForeignKey(Users, on_delete=models.CASCADE) # tyutor uchun
+    topshiriq = models.ForeignKey(Topshiriq, on_delete=models.CASCADE, related_name='javoblar')
+    test = models.ForeignKey(Test, on_delete=models.CASCADE)
+    tanlangan_javob = models.CharField(max_length=1)  # A/B/C/D
+    togri = models.BooleanField(default=False)
+
 
 
     
+ 

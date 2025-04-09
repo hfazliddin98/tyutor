@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'drf_yasg',
     'corsheaders',
     'dbbackup', 
-    'import_export',
 
     # men qoshgan app
     'users',

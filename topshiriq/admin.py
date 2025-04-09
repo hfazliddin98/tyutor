@@ -1,6 +1,5 @@
 from django.contrib import admin
-from import_export.admin import ImportExportModelAdmin
-from topshiriq.models import Topshiriq, MajburiyTopshiriq, QoshimchaTopshiriq, Testlar
+from topshiriq.models import Topshiriq, MajburiyTopshiriq, QoshimchaTopshiriq, Test
 # from topshiriq.models import SuperAdminTopshiriq, SuperAdminMajburiyTopshiriq, SuperAdminQoshimchaTopshiriq
 
 
@@ -18,8 +17,8 @@ class QoshimchaTopshiriqAdmin(admin.ModelAdmin):
 
 
 
-@admin.register(Testlar)
-class TestlarAdmin(ImportExportModelAdmin):
+@admin.register(Test)
+class TestlarAdmin(admin.ModelAdmin):
     list_display  = ['id']
 
 # @admin.register(SuperAdminQoshimchaTopshiriq)
